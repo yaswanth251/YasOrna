@@ -48,7 +48,7 @@ function UserRegister() {
 
     try {
         // Make a request to register the user
-        const response = await axios.post("http://localhost:3001/userregister", {
+        const response = await axios.post("https://yasorna-backend-production.up.railway.app/userregister", {
             name,
             email,
             password,

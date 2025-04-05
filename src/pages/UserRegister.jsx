@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import gemmImage from "../assets/Images/gemm.png";
 import Mail from "../assets/Images/mail.png";
 import { Swiper, SwiperSlide } from "swiper/react";

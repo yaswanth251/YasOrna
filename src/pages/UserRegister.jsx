@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import gemmImage from "../assets/Images/gemm.png";
 import Mail from "../assets/Images/mail.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
@@ -49,7 +48,7 @@ function UserRegister() {
 
     try {
         // Make a request to register the user
-        const response = await axios.post("http://localhost:3001/userregister", {
+        const response = await axios.post("https://yasorna-backend-production.up.railway.app/userregister", {
             name,
             email,
             password,
@@ -106,7 +105,7 @@ function UserRegister() {
       <div className="relative flex justify-between p-5">
         <div className="flex items-center">
           <img
-            src={gemmImage}
+            src={"https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/3171475/gems-clipart-md.png"}
             className="z-20 w-[100px] h-[100px] relative left-27"
             alt="Gem"
           />

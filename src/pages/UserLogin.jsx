@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import gemmImage from "../assets/Images/gem.png";
 import Mail from "../assets/Images/mail.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
@@ -25,7 +24,7 @@ function UserLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3001/login", { email, password });
+      const response = await axios.post("https://yasorna-backend-production.up.railway.app/login", { email, password });
   
       if (response.data && response.data.name) {
         const { name } = response.data;  // Extract name from response
@@ -62,7 +61,7 @@ function UserLogin() {
       {/* Header */}
       <div className="relative flex justify-between p-5">
         <div className="flex items-center">
-          <img src={gemmImage} className="z-20 w-[100px] h-[100px]" alt="Gem" />
+          <img src={"https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/3171475/gems-clipart-md.png"} className="z-20 w-[100px] h-[100px]" alt="Gem" />
           <div className="relative z-20 text-3xl text-white p-1 ml-3">YasOrna</div>
         </div>
         <div className="z-20 text-2xl text-white flex items-center gap-3">

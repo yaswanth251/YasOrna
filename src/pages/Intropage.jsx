@@ -5,7 +5,6 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
 // Import images dynamically
-import gemmImage from "../assets/Images/gemm.png";
 import MailIcon from "../assets/Images/mail.png";
 import banner1 from "../assets/Images/main-back.jpg";
 import banner2 from "../assets/Images/products/Banners/banner6.jpg";
@@ -52,7 +51,7 @@ function IntroPage() {
       {/* Header */}
       <header className="relative flex justify-between items-center p-5">
         <div className="flex items-center">
-          <img src={gemmImage} className="w-[80px] h-[80px]" alt="Gem Icon" />
+          <img src={"https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/3171475/gems-clipart-md.png"} className="w-[80px] h-[80px]" alt="Gem Icon" />
           <div className="text-3xl text-white font-bold ml-3 tracking-wide">
             YasOrna
           </div>

@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import backgroundImage from "../assets/Images/main-back.jpg";
-import gemmImage from "../assets/Images/gemm.png";
-import Mail from "../assets/Images/mail.png";
 
 function AdminLogin() {
   const navigate = useNavigate();
@@ -11,20 +8,20 @@ function AdminLogin() {
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent page refresh
+    e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3001/adminlogin", {
+      const response = await axios.post("https://yasorna-backend-production.up.railway.app/adminlogin", {
         email,
         password,
       });
       if (response.data && response.data.name) {
-        const { name } = response.data;  // Extract name from response
+        const { name } = response.data;
         console.log("Login Successful:", response.data);
-  
+
         alert("Login Successful!");
-        navigate("/AdminHome", { state: { name, email } }); // Pass name and email to the next page
+        navigate("/AdminHome", { state: { name, email } });
       } else {
-        setError("Login Failed! Name not found.");
+        alert("Login Failed! Name not found.");
       }
     } catch (err) {
       console.error("Login Failed:", err);
@@ -35,16 +32,18 @@ function AdminLogin() {
   return (
     <div
       className="h-screen bg-cover bg-center bg-no-repeat fixed w-screen"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      style={{
+        backgroundImage: `url("https://images6.alphacoders.com/406/thumb-1920-406888.jpg")`,
+      }}
     >
-      {/* Semi-transparent overlay */}
+      {/* Overlay */}
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
       {/* Header */}
       <div className="flex justify-between p-5">
         <div className="flex items-center">
           <img
-            src={gemmImage}
+            src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/3171475/gems-clipart-md.png"
             className="z-20 w-[100px] h-[100px] left-10 top-7"
             alt="Gem Image"
           />
@@ -55,10 +54,12 @@ function AdminLogin() {
 
         {/* Contact Us */}
         <div className="z-20 text-2xl text-white flex items-center gap-3">
-          <button className="hover:text-amber-400 transition">
-            Contact Us
-          </button>
-          <img src={Mail} className="w-10 h-10" alt="Mail Icon" />
+          <button className="hover:text-amber-400 transition">Contact Us</button>
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/561/561127.png"
+            className="w-10 h-10"
+            alt="Mail Icon"
+          />
         </div>
       </div>
 
@@ -107,7 +108,7 @@ function AdminLogin() {
 
       {/* Register Button */}
       <button
-        className="absolute bottom-45 left-[50%] translate-x-[-50%] text-white text-2xl   px-5 rounded-lg hover:bg-yellow-600 hover:text-black transition"
+        className="absolute bottom-45 left-[50%] translate-x-[-50%] text-white text-2xl px-5 rounded-lg hover:bg-yellow-600 hover:text-black transition"
         onClick={() => navigate("/AdminRegister")}
       >
         Don't have an account? Register Here

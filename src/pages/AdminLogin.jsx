@@ -10,7 +10,7 @@ function AdminLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://yasorna-backend-production.up.railway.app/adminlogin", {
+      const response = await axios.post("http://localhost:3001/adminlogin", {
         email,
         password,
       });

@@ -51,7 +51,7 @@ function LoginIntro() {
       {/* Header */}
       <header className="relative flex justify-between items-center p-5">
         <div className="flex items-center">
-          <img src={"https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/3171475/gems-clipart-md.png"} className="w-[80px] h-[80px]" alt="Gem Icon" />
+          <img src={""} className="w-[80px] h-[80px]" alt="Gem Icon" />
           <div className="text-3xl text-white font-bold ml-3 tracking-wide">
             YasOrna
           </div>

@@ -25,7 +25,7 @@ function AdminRegister() {
     }
 
     try {
-      const response = await axios.post("https://yasorna-backend-production.up.railway.app/adminregister", {
+      const response = await axios.post("http://localhost:3001/adminregister", {
         name,
         mobile,
         email,

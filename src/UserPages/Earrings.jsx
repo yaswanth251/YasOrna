@@ -4,24 +4,56 @@ import { useNavigate } from "react-router-dom";
 import UserHome from "./UserHome";
 import Foot from "./Foot";
 
-import Earring1 from "../assets/Images/products/Earrings/image17.png";
-import Earring2 from "../assets/Images/products/Earrings/image18.png";
-import Earring3 from "../assets/Images/products/Earrings/image19.png";
-import Earring4 from "../assets/Images/products/Earrings/image20.png";
-import Earring5 from "../assets/Images/products/Earrings/image21.png";
-import Earring6 from "../assets/Images/products/Earrings/image22.png";
-import Earring7 from "../assets/Images/products/Earrings/image23.png";
-import Earring8 from "../assets/Images/products/Earrings/image24.png";
 
 const products = [
-  { image: Earring1, title: "Gold Earrings", price: 4500 },
-  { image: Earring2, title: "Diamond Earrings", price: 13000 },
-  { image: Earring3, title: "Ruby Earrings", price: 8000 },
-  { image: Earring4, title: "Emerald Earrings", price: 9900 },
-  { image: Earring5, title: "Sapphire Earrings", price: 11500 },
-  { image: Earring6, title: "Platinum Earrings", price: 16000 },
-  { image: Earring7, title: "Rose Gold Earrings", price: 8900 },
-  { image: Earring8, title: "Silver Earrings", price: 4200 },
+  {
+    image:
+      "https://www.pngall.com/wp-content/uploads/8/Earring-PNG-Download-Image.png",
+    title: "Gold Earrings",
+    price: 4500,
+  },
+  {
+    image:
+      "https://clipground.com/images/png-gold-earrings-1.png",
+    title: "Diamond Earrings",
+    price: 13000,
+  },
+  {
+    image:
+      "https://www.pngmart.com/files/23/Earring-PNG-Isolated-HD.png",
+    title: "Ruby Earrings",
+    price: 8000,
+  },
+  {
+    image:
+      "https://static01.srikrishna.com/DealImages/7133/ZoomImages/ear193121.png",
+    title: "Emerald Earrings",
+    price: 9900,
+  },
+  {
+    image:
+      "https://www.pngmart.com/files/23/Gold-Earrings-PNG-HD-Isolated.png",
+    title: "Sapphire Earrings",
+    price: 11500,
+  },
+  {
+    image:
+      "https://www.pngall.com/wp-content/uploads/8/Earring-PNG-File-Download-Free.png",
+    title: "Platinum Earrings",
+    price: 16000,
+  },
+  {
+    image:
+      "https://pnghq.com/wp-content/uploads/buy-gold-earrings-online-64053.png",
+    title: "Rose Gold Earrings",
+    price: 8900,
+  },
+  {
+    image:
+      "https://cdn0.rubylane.com/shops/1231960/Earr-614.1L.jpg",
+    title: "Silver Earrings",
+    price: 4200,
+  },
 ];
 
 function Earrings() {
@@ -61,7 +93,9 @@ function Earrings() {
         >
           Back to Home
         </button>
-        <h1 className="text-3xl text-center text-amber-800">Hand Picked for You</h1>
+        <h1 className="text-3xl text-center text-amber-800">
+          Hand Picked for You
+        </h1>
         <hr className="opacity-25 mb-4" />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -80,14 +114,22 @@ function Earrings() {
               <h1>₹{product.price}/-</h1>
               <div className="flex justify-between w-full px-4">
                 <FaHeart
-                  className={`cursor-pointer text-lg ${wishlist.some((item) => item.image === product.image) ? "text-red-500" : "text-gray-400"}`}
+                  className={`cursor-pointer text-lg ${
+                    wishlist.some((item) => item.image === product.image)
+                      ? "text-red-500"
+                      : "text-gray-400"
+                  }`}
                   onClick={(e) => {
                     e.stopPropagation();
                     handleAddToWishlist(product);
                   }}
                 />
                 <FaShoppingCart
-                  className={`cursor-pointer text-lg ${cart.some((item) => item.image === product.image) ? "text-green-500" : "text-gray-400"}`}
+                  className={`cursor-pointer text-lg ${
+                    cart.some((item) => item.image === product.image)
+                      ? "text-green-500"
+                      : "text-gray-400"
+                  }`}
                   onClick={(e) => {
                     e.stopPropagation();
                     handleAddToCart(product);

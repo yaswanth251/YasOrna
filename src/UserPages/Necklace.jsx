@@ -4,24 +4,65 @@ import { useNavigate } from "react-router-dom";
 import UserHome from "./UserHome";
 import Foot from "./Foot";
 
-import Necklace1 from "../assets/Images/products/Necklace/image1007.png";
-import Necklace2 from "../assets/Images/products/Necklace/image1018.png";
-import Necklace3 from "../assets/Images/products/Necklace/image1019.png";
-import Necklace4 from "../assets/Images/products/Necklace/image1020.png";
-import Necklace5 from "../assets/Images/products/Necklace/image1021.png";
-import Necklace6 from "../assets/Images/products/Necklace/image1022.png";
-import Necklace7 from "../assets/Images/products/Necklace/image1023.png";
-import Necklace8 from "../assets/Images/products/Necklace/image1024.png";
 
 const products = [
-  { id: 1, image: Necklace1, title: "Gold Necklace", price: 7500 },
-  { id: 2, image: Necklace2, title: "Diamond Necklace", price: 22000 },
-  { id: 3, image: Necklace3, title: "Ruby Necklace", price: 18000 },
-  { id: 4, image: Necklace4, title: "Emerald Necklace", price: 19900 },
-  { id: 5, image: Necklace5, title: "Sapphire Necklace", price: 21500 },
-  { id: 6, image: Necklace6, title: "Platinum Necklace", price: 26000 },
-  { id: 7, image: Necklace7, title: "Rose Gold Necklace", price: 18900 },
-  { id: 8, image: Necklace8, title: "Silver Necklace", price: 9200 },
+  {
+    id: "necklace-1",
+    image:
+      "https://www.pngall.com/wp-content/uploads/8/Gold-Jewellery-Necklace-PNG-Free-Download.png",
+    price: 79000,
+  },
+  {
+    id: "necklace-2",
+    image:
+      "https://pnghq.com/wp-content/uploads/necklace-png-transparent-elements.png",
+    price: 75000,
+  },
+  {
+    id: "necklace-3",
+    image:
+      "https://clipart-library.com/image_gallery2/Jewellery-PNG-Picture.png",
+    price: 80000,
+  },
+  {
+    id: "necklace-4",
+    image:
+      "https://i.pinimg.com/originals/e0/43/3a/e0433ac5b79a2642067641e75f510a9b.png",
+    price: 85000,
+  },
+  {
+    id: "necklace-5",
+    image:
+      "http://www.pngmart.com/files/1/Jewellery-Necklace-Transparent-PNG.png",
+    price: 21999,
+  },
+  {
+    id: "necklace-6",
+    image: "https://www.pngmart.com/files/22/Jewelry-PNG-Isolated-HD.png",
+    price: 15999,
+  },
+  {
+    id: "necklace-7",
+    image: "https://purepng.com/public/uploads/large/love-pendant-ych.png",
+    price: 69155,
+  },
+  {
+    id: "necklace-8",
+    image:
+      "https://www.pngall.com/wp-content/uploads/8/Gold-Necklace-PNG-Picture.png",
+    price: 98000,
+  },
+  {
+    id: "necklace-9",
+    image:
+      "https://www.pngarts.com/files/3/Necklace-Jewellery-Set-PNG-Image.png",
+    price: 28999,
+  },
+  {
+    id: "necklace-10",
+    image: "https://www.pngarts.com/files/3/Jewellery-PNG-Picture.png",
+    price: 19999,
+  },
 ];
 
 function Necklace() {
@@ -63,7 +104,9 @@ function Necklace() {
         >
           Back to Home
         </button>
-        <h1 className="text-3xl text-center text-amber-800">Hand Picked for You</h1>
+        <h1 className="text-3xl text-center text-amber-800">
+          Hand Picked for You
+        </h1>
         <hr className="opacity-25 mb-4" />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -83,13 +126,17 @@ function Necklace() {
               <div className="flex justify-between w-full px-4">
                 <FaHeart
                   className={`cursor-pointer text-lg ${
-                    wishlist.some((item) => item.id === product.id) ? "text-red-500" : "text-gray-400"
+                    wishlist.some((item) => item.id === product.id)
+                      ? "text-red-500"
+                      : "text-gray-400"
                   }`}
                   onClick={(e) => handleAddToWishlist(product, e)}
                 />
                 <FaShoppingCart
                   className={`cursor-pointer text-lg ${
-                    cart.some((item) => item.id === product.id) ? "text-green-500" : "text-gray-400"
+                    cart.some((item) => item.id === product.id)
+                      ? "text-green-500"
+                      : "text-gray-400"
                   }`}
                   onClick={(e) => handleAddToCart(product, e)}
                 />

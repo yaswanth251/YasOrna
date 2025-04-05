@@ -7,13 +7,29 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
 // Import images dynamically
-import banner1 from "../assets/Images/main-back.jpg";
-import banner2 from "../assets/Images/products/Banners/banner6.jpg";
-import banner3 from "../assets/Images/products/Banners/banner3.png";
-import banner5 from "../assets/Images/products/Banners/banner11.jpg";
-import banner7 from "../assets/Images/products/Banners/banner7.jpg";
 
-const images = [banner1, banner2, banner3, banner5, banner7];
+const images = [
+  {
+    url: "https://i.pinimg.com/originals/65/a4/62/65a4628cd306b8425a59feae2c99d0ae.jpg",
+    alt: "Bridal Jewelry Collection",
+  },
+  {
+    url: "https://mir-s3-cdn-cf.behance.net/project_modules/1400/934a2b88873337.5de56582a78a5.png",
+    alt: "Exclusive Necklace Set",
+  },
+  {
+    url: "https://cdn.shopify.com/s/files/1/1115/6326/files/B1004_Diamonds_banner_2_thumb_61466c50-3bfb-4d54-a2b3-205219e956f5.jpg?v=1511876014",
+    alt: "Elegant Wedding Jewellery",
+  },
+  {
+    url: "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/4276fe171225559.646b8933ea575.jpg",
+    alt: "Elegant Wedding Jewellery",
+  },
+  {
+    url: "https://mir-s3-cdn-cf.behance.net/project_modules/1400/99bfd6152898429.632604445de58.jpg",
+    alt: "Elegant Wedding Jewellery",
+  },
+];
 
 function UserLogin() {
   const navigate = useNavigate();
@@ -24,12 +40,15 @@ function UserLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://yasorna-backend-production.up.railway.app/login", { email, password });
-  
+      const response = await axios.post(
+        "https://yasorna-backend-production.up.railway.app/login",
+        { email, password }
+      );
+
       if (response.data && response.data.name) {
-        const { name } = response.data;  // Extract name from response
+        const { name } = response.data; // Extract name from response
         console.log("Login Successful:", response.data);
-  
+
         alert("Login Successful!");
         navigate("/Merge", { state: { name, email } }); // Pass name and email to the next page
       } else {
@@ -40,16 +59,24 @@ function UserLogin() {
       setError("Login Failed! Check your credentials.");
     }
   };
-  
 
   return (
     <div className="relative h-screen w-screen">
       {/* Background Swiper */}
       <div className="absolute inset-0 -z-10">
-        <Swiper modules={[Autoplay]} autoplay={{ delay: 3000 }} loop className="w-full h-full">
+        <Swiper
+          modules={[Autoplay]}
+          autoplay={{ delay: 3000 }}
+          loop
+          className="w-full h-full"
+        >
           {images.map((image, index) => (
             <SwiperSlide key={index}>
-              <img src={image} alt={`Slide ${index + 1}`} className="w-full h-full object-cover" />
+              <img
+                src={image.url}
+                alt={image.alt}
+                className="w-full h-full object-cover"
+              />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -61,11 +88,21 @@ function UserLogin() {
       {/* Header */}
       <div className="relative flex justify-between p-5">
         <div className="flex items-center">
-          <img src={"https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/3171475/gems-clipart-md.png"} className="z-20 w-[100px] h-[100px]" alt="Gem" />
-          <div className="relative z-20 text-3xl text-white p-1 ml-3">YasOrna</div>
+          <img
+            src={
+              "https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/3171475/gems-clipart-md.png"
+            }
+            className="z-20 w-[100px] h-[100px]"
+            alt="Gem"
+          />
+          <div className="relative z-20 text-3xl text-white p-1 ml-3">
+            YasOrna
+          </div>
         </div>
         <div className="z-20 text-2xl text-white flex items-center gap-3">
-          <button className="hover:text-amber-400 transition">Contact Us</button>
+          <button className="hover:text-amber-400 transition">
+            Contact Us
+          </button>
           <img src={Mail} className="w-10 h-10" alt="Mail Icon" />
         </div>
       </div>
@@ -75,7 +112,10 @@ function UserLogin() {
         <div className="z-20 flex flex-col w-[400px] h-max rounded-lg shadow-lg p-5 bg-opacity-80 bg-gray-900">
           <h1 className="font-bold text-3xl text-white">User Login</h1>
           {error && <p className="text-red-600 font-bold">{error}</p>}
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5 items-center relative top-4">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-5 items-center relative top-4"
+          >
             <div className="flex gap-4">
               <div className="flex flex-col text-left items-start gap-3.5 text-[#a48b8b]">
                 <label>E-mail</label>

@@ -5,19 +5,13 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
 // Import images dynamically
-import MailIcon from "../assets/Images/mail.png";
-import banner1 from "../assets/Images/main-back.jpg";
-import banner2 from "../assets/Images/products/Banners/banner6.jpg";
-import banner3 from "../assets/Images/products/Banners/banner3.png";
-import banner5 from "../assets/Images/products/Banners/banner11.jpg";
-import banner7 from "../assets/Images/products/Banners/banner7.jpg";
 
 const images = [
-  { url: banner1, alt: "Bridal Jewelry Collection" },
-  { url: banner2, alt: "Exclusive Necklace Set" },
-  { url: banner3, alt: "Elegant Wedding Jewellery" },
-  { url: banner5, alt: "Elegant Wedding Jewellery" },
-  { url: banner7, alt: "Elegant Wedding Jewellery" },
+  { url: "https://i.pinimg.com/originals/65/a4/62/65a4628cd306b8425a59feae2c99d0ae.jpg", alt: "Bridal Jewelry Collection" },
+  { url: "https://mir-s3-cdn-cf.behance.net/project_modules/1400/934a2b88873337.5de56582a78a5.png", alt: "Exclusive Necklace Set" },
+  { url: "https://cdn.shopify.com/s/files/1/1115/6326/files/B1004_Diamonds_banner_2_thumb_61466c50-3bfb-4d54-a2b3-205219e956f5.jpg?v=1511876014", alt: "Elegant Wedding Jewellery" },
+  { url: "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/4276fe171225559.646b8933ea575.jpg", alt: "Elegant Wedding Jewellery" },
+  { url: "https://mir-s3-cdn-cf.behance.net/project_modules/1400/99bfd6152898429.632604445de58.jpg", alt: "Elegant Wedding Jewellery" },
 ];
 
 function IntroPage() {
@@ -51,8 +45,8 @@ function IntroPage() {
       {/* Header */}
       <header className="relative flex justify-between items-center p-5">
         <div className="flex items-center">
-          <img src={"https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/3171475/gems-clipart-md.png"} className="w-[80px] h-[80px]" alt="Gem Icon" />
-          <div className="text-3xl text-white font-bold ml-3 tracking-wide">
+        <img src={"https://static.vecteezy.com/system/resources/previews/001/198/307/large_2x/diamond-png.png"} className="w-[80px] h-[80px]" alt="Gem Icon" />
+        <div className="text-3xl text-white font-bold ml-3 tracking-wide">
             YasOrna
           </div>
         </div>
@@ -60,7 +54,7 @@ function IntroPage() {
           <a href="mailto:support@gmail.com" className="hover:text-amber-400 transition">
             Contact Us
           </a>
-          <img src={MailIcon} className="w-8 h-8" alt="Mail Icon" />
+          <img src={"https://static.vecteezy.com/system/resources/previews/020/964/377/non_2x/gmail-mail-icon-for-web-design-free-png.png"} className="w-8 h-8" alt="Mail Icon" />
         </div>
       </header>
 

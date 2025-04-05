@@ -4,25 +4,49 @@ import { useNavigate } from "react-router-dom";
 import UserHome from "./UserHome";
 import Foot from "./Foot";
 
-import Bangle17 from "../assets/Images/products/Ring/image107.jpg";
-import Bangle18 from "../assets/Images/products/Ring/image118.jpg";
-import Bangle19 from "../assets/Images/products/Ring/image119.jpg";
-import Bangle20 from "../assets/Images/products/Ring/image120.jpg";
-import Bangle21 from "../assets/Images/products/Ring/image121.jpg";
-import Bangle22 from "../assets/Images/products/Ring/image122.jpg";
-import Bangle23 from "../assets/Images/products/Ring/image123.jpg";
-import Bangle24 from "../assets/Images/products/Ring/image124.jpg";
-
 const products = [
-  { image: Bangle17, title: "Gold Ring", price: 5000 },
-  { image: Bangle18, title: "Diamond Ring", price: 12000 },
-  { image: Bangle19, title: "Ruby Ring", price: 7000 },
-  { image: Bangle20, title: "Emerald Ring", price: 9500 },
-  { image: Bangle21, title: "Sapphire Ring", price: 11000 },
-  { image: Bangle22, title: "Platinum Ring", price: 15000 },
-  { image: Bangle23, title: "Rose Gold Ring", price: 8500 },
-  { image: Bangle24, title: "Silver Ring", price: 4000 },
+  {
+    image: "https://pngimg.com/uploads/jewelry/jewelry_PNG6738.png",
+    title: "Gold Ring",
+    price: 5000,
+  },
+  {
+    image: "http://pngimg.com/uploads/jewelry/jewelry_PNG6712.png",
+    title: "Diamond Ring",
+    price: 12000,
+  },
+  {
+    image: "https://freepngimg.com/download/gold/37273-5-gold-rings-hd.png",
+    title: "Ruby Ring",
+    price: 7000,
+  },
+  {
+    image: "http://pngimg.com/uploads/jewelry/jewelry_PNG6712.png",
+    title: "Emerald Ring",
+    price: 9500,
+  },
+  {
+    image: "https://pngimg.com/uploads/jewelry/jewelry_PNG6840.png",
+    title: "Sapphire Ring",
+    price: 11000,
+  },
+  {
+    image: "https://freepngimg.com/thumb/jewellery/5-2-jewellery-free-download-png.png",
+    title: "Platinum Ring",
+    price: 15000,
+  },
+  {
+    image: "https://pngimg.com/uploads/ring/ring_PNG29.png",
+    title: "Rose Gold Ring",
+    price: 8500,
+  },
+  {
+    image: "https://pngimg.com/uploads/ring/ring_PNG113.png",
+    title: "Silver Ring",
+    price: 4000,
+  },
 ];
+
 
 function Ring() {
   const navigate = useNavigate();

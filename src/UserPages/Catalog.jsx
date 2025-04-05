@@ -2,54 +2,41 @@ import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import ProductView from "./ProductView";
 
-import Bangle17 from "../assets/Images/products/Bangles/image417.png";
-import Bangle18 from "../assets/Images/products/Bangles/image418.png";
-import Bangle19 from "../assets/Images/products/Bangles/image419.png";
-import Bangle20 from "../assets/Images/products/Bangles/image420.png";
-import Bangle21 from "../assets/Images/products/Bangles/image421.png";
-import Bangle22 from "../assets/Images/products/Bangles/image415.png";
-import Bangle23 from "../assets/Images/products/Bangles/image435.png";
-import Bangle24 from "../assets/Images/products/Bangles/image425.png";
-import Bangle25 from "../assets/Images/products/Bangles/image429.png";
-import Bangle26 from "../assets/Images/products/Bangles/image427.png";
-
-import Necklace1 from "../assets/Images/products/Necklace/image1021.png";
-import Necklace2 from "../assets/Images/products/Necklace/image1031.png";
-import Necklace3 from "../assets/Images/products/Necklace/image1041.png";
-import Necklace4 from "../assets/Images/products/Necklace/image1081.png";
-import Necklace5 from "../assets/Images/products/Necklace/image1021.png";
-import Necklace6 from "../assets/Images/products/Necklace/image1022.png";
-import Necklace7 from "../assets/Images/products/Necklace/image1024.png";
-import Necklace8 from "../assets/Images/products/Necklace/image1026.png";
-import Necklace9 from "../assets/Images/products/Necklace/image1025.png";
-import Necklace10 from "../assets/Images/products/Necklace/image1054.png";
-
 const initialProducts = [
-  { id: "bangles", title: "Bangles", items: [
-    { id: "bangle-1", image: Bangle17, price: 45500 },
-    { id: "bangle-2", image: Bangle18, price: 59500 },
-    { id: "bangle-3", image: Bangle19, price: 59500 },
-    { id: "bangle-4", image: Bangle20, price: 60900 },
-    { id: "bangle-5", image: Bangle21, price: 95500 },
-    { id: "bangle-6", image: Bangle22, price: 69500 },
-    { id: "bangle-7", image: Bangle23, price: 39500 },
-    { id: "bangle-8", image: Bangle24, price: 80900 },
-    { id: "bangle-9", image: Bangle25, price: 99999 },
-    { id: "bangle-10", image: Bangle26, price: 12999 },
-  ] },
-  { id: "necklaces", title: "Necklaces", items: [
-    { id: "necklace-1", image: Necklace1, price: 79000 },
-    { id: "necklace-2", image: Necklace2, price: 75000 },
-    { id: "necklace-3", image: Necklace3, price: 80000 },
-    { id: "necklace-4", image: Necklace4, price: 85000 },
-    { id: "necklace-5", image: Necklace5, price: 21999 },
-    { id: "necklace-6", image: Necklace6, price: 15999 },
-    { id: "necklace-7", image: Necklace7, price: 69155 },
-    { id: "necklace-8", image: Necklace8, price: 98000 },
-    { id: "necklace-9", image: Necklace9, price: 28999 },
-    { id: "necklace-10", image: Necklace10, price: 19999 },
-  ] },
+  {
+    id: "bangles",
+    title: "Bangles",
+    items: [
+      { id: "bangle-1", image: "https://png.pngtree.com/png-vector/20240627/ourmid/pngtree-exquisite-gold-bangles-for-a-perfect-wedding-look-png-image_12891744.png", price: 45500 },
+      { id: "bangle-2", image: "https://admin.pngadgil1832.com/UploadedFiles/ProductImages/KGNSET27_2GPNG_02.png", price: 59500 },
+      { id: "bangle-3", image: "https://admin.pngadgil1832.com/UploadedFiles/ProductImages/KGNSET27_2GPNG_01.png", price: 59500 },
+      { id: "bangle-4", image: "https://static.vecteezy.com/system/resources/previews/045/092/598/non_2x/choose-the-perfect-bangles-for-any-occasion-free-png.png", price: 60900 },
+      { id: "bangle-5", image: "https://static.vecteezy.com/system/resources/previews/045/092/598/non_2x/choose-the-perfect-bangles-for-any-occasion-free-png.png", price: 95500 },
+      { id: "bangle-6", image: "https://www.pngarts.com/files/3/Gold-Jewellery-Transparent-Image-391x279.png", price: 69500 },
+      { id: "bangle-7", image: "https://cdn0.rubylane.com/shops/mur-sadies/MS006789.1L.jpg", price: 39500 },
+      { id: "bangle-8", image: "https://i.pinimg.com/originals/77/99/a5/7799a55963695b1cd1fa4417a224b01b.png", price: 80900 },
+      { id: "bangle-9", image: "https://i.pinimg.com/originals/77/99/a5/7799a55963695b1cd1fa4417a224b01b.png", price: 99999 },
+      { id: "bangle-10", image: "https://static.vecteezy.com/system/resources/previews/045/092/645/non_2x/exploring-the-world-of-bangles-free-png.png", price: 12999 },
+    ],
+  },
+  {
+    id: "necklaces",
+    title: "Necklaces",
+    items: [
+      { id: "necklace-1", image: "https://www.pngall.com/wp-content/uploads/8/Gold-Jewellery-Necklace-PNG-Free-Download.png", price: 79000 },
+      { id: "necklace-2", image: "https://pnghq.com/wp-content/uploads/necklace-png-transparent-elements.png", price: 75000 },
+      { id: "necklace-3", image: "https://clipart-library.com/image_gallery2/Jewellery-PNG-Picture.png", price: 80000 },
+      { id: "necklace-4", image: "https://i.pinimg.com/originals/e0/43/3a/e0433ac5b79a2642067641e75f510a9b.png", price: 85000 },
+      { id: "necklace-5", image: "http://www.pngmart.com/files/1/Jewellery-Necklace-Transparent-PNG.png", price: 21999 },
+      { id: "necklace-6", image: "https://www.pngmart.com/files/22/Jewelry-PNG-Isolated-HD.png", price: 15999 },
+      { id: "necklace-7", image: "https://purepng.com/public/uploads/large/love-pendant-ych.png", price: 69155 },
+      { id: "necklace-8", image: "https://www.pngall.com/wp-content/uploads/8/Gold-Necklace-PNG-Picture.png", price: 98000 },
+      { id: "necklace-9", image: "https://www.pngarts.com/files/3/Necklace-Jewellery-Set-PNG-Image.png", price: 28999 },
+      { id: "necklace-10", image: "https://www.pngarts.com/files/3/Jewellery-PNG-Picture.png", price: 19999 },
+    ],
+  },
 ];
+
 
 const Catalog = () => {
   const navigate = useNavigate();

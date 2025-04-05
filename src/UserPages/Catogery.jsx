@@ -1,19 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import Necklace from "../assets/Images/products/Necklace/image917.png";
-import Bangle from "../assets/Images/products/Bangles/image1609.png";
-import RingDiamong from "../assets/Images/products/Ring/image45.jpg";
-
-import Necklace1 from "../assets/Images/products/Necklace/image1007.png";
-import Necklacelong1 from "../assets/Images/products/Earrings/image213.png";
-import Bangle1 from "../assets/Images/products/Bangles/image399.png";
-import RingDiamong1 from "../assets/Images/products/Ring/image188.jpg";
-import Earring1 from "../assets/Images/products/Earrings/image730.png";
-import Earring2 from "../assets/Images/products/Earrings/image10.png";
-import Necklace2 from "../assets/Images/products/Necklace/image10.png";
-import Bangle2 from "../assets/Images/products/Bangles/image450.png";
-import RingDiamong2 from "../assets/Images/products/Ring/image20.jpg";
 
 const navigationMap = {
   "Fashion Necklace": "/Necklace",
@@ -29,19 +16,56 @@ const navigationMap = {
 };
 
 const categorie = [
-  { name: "Fashion Necklace", image: Necklace1 },
-  { name: "Cuff Bangles", image: Bangle1 },
-  { name: "Gold Ring", image: RingDiamong1 },
-  { name: "Earring", image: Necklacelong1 },
-  { name: "Jhumkas", image: Earring1 },
-  { name: "Necklace Set", image: Necklace },
-  { name: "Diamond Jewellery", image: RingDiamong },
-  { name: "Bangles", image: Bangle },
-  { name: "Elegant Earrings", image: Earring2 },
-  { name: "Royal Necklace", image: Necklace2 },
-  { name: "Classic Bangles", image: Bangle2 },
-  { name: "Luxury Ring", image: RingDiamong2 },
+  {
+    name: "Fashion Necklace",
+    image: "https://www.pngmart.com/files/16/Necklace-Jewellery-PNG-Clipart.png",
+  },
+  {
+    name: "Cuff Bangles",
+    image: "https://i5.walmartimages.com/asr/530cf535-d886-4515-8877-69f7a552363b_1.8eab48fff0c381ee7e3ddd37c480b209.jpeg",
+  },
+  {
+    name: "Gold Ring",
+    image: "https://pngimg.com/uploads/jewelry/jewelry_PNG6767.png",
+  },
+  {
+    name: "Earring",
+    image: "https://pnghq.com/wp-content/uploads/earring-png-image-png-high-resolution.png",
+  },
+  {
+    name: "Jhumkas",
+    image: "https://www.pngmart.com/files/23/Earring-PNG-Picture.png",
+  },
+  {
+    name: "Necklace Set",
+    image: "https://www.pngarts.com/files/3/Necklace-Jewellery-Set-PNG-Image-Transparent.png",
+  },
+  {
+    name: "Diamond Jewellery",
+    image: "https://www.pngall.com/wp-content/uploads/15/Diamond-Earring-PNG-Image-File.png",
+  },
+  {
+    name: "Bangles",
+    image: "https://www.seekpng.com/png/full/801-8015733_gold-jewellery-images-png.png",
+  },
+  {
+    name: "Elegant Earrings",
+    image: "https://admin.pngadgil1832.com/UploadedFiles/ProductImages/ER14953526PNG_01.png",
+  },
+  {
+    name: "Royal Necklace",
+    image: "https://pluspng.com/img-png/diamond-necklace-png-click-to-zoom-1000.png",
+  },
+  {
+    name: "Classic Bangles",
+    image: "https://png.pngtree.com/png-vector/20240731/ourmid/pngtree-banner-of-colorful-bangles-chudiyan-worn-by-punjabi-women-vibrant-and-png-image_13319064.png",
+  },
+  {
+    name: "Luxury Ring",
+    image: "https://pngimg.com/uploads/ring/ring_PNG149.png",
+  },
 ];
+
 
 const CategoryCard = ({ name, image }) => {
   const navigate = useNavigate();

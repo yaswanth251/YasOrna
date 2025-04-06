@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { FaHeart, FaShoppingCart } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import UserHome from "./UserHome";
+import React, { useState, useMemo } from "react";
+import ProductView from "./ProductView"; // Make sure this is the correct path
+import CartWishlist from "./CartWishlist"; // Make sure this is the correct path
+import UserHome from "./UserHome"
 import Foot from "./Foot";
-import DetailView from "./DetailView";
-
-const products = [
+const initialProducts = [
   {
     id: "bangle-1",
     image:
@@ -67,91 +65,86 @@ const products = [
   },
 ];
 
+
 function Bangles() {
-  const navigate = useNavigate();
-  const [wishlist, setWishlist] = useState([]);
   const [cart, setCart] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
+  const [sortType, setSortType] = useState(null);
+  const [activePanel, setActivePanel] = useState();
 
-  useEffect(() => {
-    setWishlist(JSON.parse(localStorage.getItem("wishlist")) || []);
-    setCart(JSON.parse(localStorage.getItem("cart")) || []);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("wishlist", JSON.stringify(wishlist));
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [wishlist, cart]);
-
-  const handleAddToWishlist = (product) => {
-    if (!wishlist.some((item) => item.image === product.image)) {
-      setWishlist([...wishlist, product]);
-    }
-  };
+  const sortedProducts = useMemo(() => {
+    if (!sortType) return initialProducts;
+    return [...initialProducts].sort((a, b) =>
+      sortType === "lowToHigh" ? a.price - b.price : b.price - a.price
+    );
+  }, [sortType]);
 
   const handleAddToCart = (product) => {
-    if (!cart.some((item) => item.image === product.image)) {
-      setCart([...cart, product]);
-    }
+    setCart((prevCart) => {
+      const existing = prevCart.find((item) => item.id === product.id);
+      if (existing) {
+        return prevCart.map((item) =>
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      }
+      return [...prevCart, { ...product, quantity: 1 }];
+    });
+  };
+
+  const handleAddToWishlist = (product) => {
+    setWishlist((prevWishlist) =>
+      prevWishlist.some((item) => item.id === product.id)
+        ? prevWishlist
+        : [...prevWishlist, product]
+    );
   };
 
   return (
     <>
-      <UserHome />
-      <div className="p-4 md:p-8">
-        <button
-          onClick={() => navigate("/Merge")}
-          className="bg-amber-600 p-2 rounded-2xl text-white mb-5"
-        >
-          Back to Home
-        </button>
-        <h1 className="text-3xl text-center text-amber-800">
-          Hand Picked for You
-        </h1>
-        <hr className="opacity-25 mb-4" />
+    <div className="sticky top-0 z-50 bg-white shadow-md">
+    <UserHome />
+  </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {products.map((product, idx) => (
-            <div
-              key={idx}
-              className="bg-white shadow-2xl p-5 flex flex-col rounded-md justify-center items-center gap-2 cursor-pointer transition-transform hover:scale-105"
-              onClick={() => navigate("/DetailView", { state: { product } })}
-            >
-              <img
-                src={product.image}
-                alt={product.title}
-                className="w-[250px] h-[250px] rounded-md shadow-lg object-cover"
-              />
-              <h1>{product.title}</h1>
-              <h1>₹{product.price}/-</h1>
-              <div className="flex justify-between w-full px-4">
-                <FaHeart
-                  className={`cursor-pointer text-lg ${
-                    wishlist.some((item) => item.image === product.image)
-                      ? "text-red-500"
-                      : "text-gray-400"
-                  }`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleAddToWishlist(product);
-                  }}
-                />
-                <FaShoppingCart
-                  className={`cursor-pointer text-lg ${
-                    cart.some((item) => item.image === product.image)
-                      ? "text-green-500"
-                      : "text-gray-400"
-                  }`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleAddToCart(product);
-                  }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
+    <div className="min-h-screen py-5">
+      <h1 className="text-3xl text-center text-amber-800">Hand Picked for You</h1>
+      <hr className="opacity-25 mb-5" />
+
+      {/* Sort Buttons */}
+      <div className="flex justify-end gap-4 mb-3 p-10">
+        <button
+          className={`px-3 py-1 rounded-md ${sortType === "lowToHigh" ? "bg-amber-500 text-white" : "bg-gray-200"}`}
+          onClick={() => setSortType("lowToHigh")}
+        >
+          Sort: Low to High
+        </button>
+        <button
+          className={`px-4 py-2 rounded-md ${sortType === "highToLow" ? "bg-amber-500 text-white" : "bg-gray-200"}`}
+          onClick={() => setSortType("highToLow")}
+        >
+          Sort: High to Low
+        </button>
       </div>
-      <Foot />
+
+      {/* Product Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {sortedProducts.map((product) => (
+          <ProductView
+            key={product.id}
+            product={product}
+            onAddToCart={handleAddToCart}
+            onAddToWishlist={handleAddToWishlist}
+          />
+        ))}
+      </div>
+
+      <CartWishlist
+        cart={cart}
+        wishlist={wishlist}
+        activePanel={activePanel}
+        setActivePanel={setActivePanel}
+      />
+    </div>
+    <Foot />
     </>
   );
 }

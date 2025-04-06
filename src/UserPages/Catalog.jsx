@@ -1,6 +1,8 @@
 import React, { useState, useMemo } from "react";
 // import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import ProductView from "./ProductView";
+import CartWishlist from "./CartWishlist"
 
 const initialProducts = [
   {
@@ -40,10 +42,12 @@ const initialProducts = [
 
 const Catalog = () => {
   // const navigate = useNavigate();
+  const [cart, setCart] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
   const [sortType, setSortType] = useState(null);
-  // const [cart, setCart] = useState([]);
-  // const [wishlist, setWishlist] = useState([]);
+  const [activePanel, setActivePanel] = useState();
 
+  // Sorting Function using useMemo
   const sortedProducts = useMemo(() => {
     if (!sortType) return initialProducts;
     return initialProducts.map((category) => ({
@@ -54,28 +58,75 @@ const Catalog = () => {
     }));
   }, [sortType]);
 
-  // const handleAddToCart = (product) => {
-  //   setCart((prevCart) => [...prevCart, product]);
-  // };
-
-  // const handleAddToWishlist = (product) => {
-  //   setWishlist((prevWishlist) => [...prevWishlist, product]);
-  // };
+  const handleAddToCart = (product) => {
+    setCart((prevCart) => {
+      const existingProduct = prevCart.find((item) => item.id === product.id);
+      if (existingProduct) {
+        return prevCart.map((item) =>
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      }
+      return [...prevCart, { ...product, quantity: 1 }];
+    });
+  };
+  
+  const handleAddToWishlist = (product) => {
+    setWishlist((prevWishlist) => {
+      if (prevWishlist.some((item) => item.id === product.id)) {
+        return prevWishlist; // Prevent duplicate additions
+      }
+      return [...prevWishlist, product];
+    });
+  };
+  
 
   return (
     <div className="min-h-screen py-5">
       <h1 className="text-3xl text-center text-amber-800">Hand Picked for You</h1>
       <hr className="opacity-25 mb-5" />
+
+      {/* Sort Buttons */}
       <div className="flex justify-end gap-4 mb-3 p-10">
-        <button className="px-3 py-1 rounded-md bg-gray-200" onClick={() => setSortType("lowToHigh")}>Sort: Low to High</button>
-        <button className="px-3 py-1 rounded-md bg-gray-200" onClick={() => setSortType("highToLow")}>Sort: High to Low</button>
+        <button
+          className={`px-3 py-1 rounded-md ${
+            sortType === "lowToHigh" ? "bg-amber-500 text-white" : "bg-gray-200"
+          }`}
+          onClick={() => setSortType("lowToHigh")}
+        >
+          Sort: Low to High
+        </button>
+        <button
+          className={`px-4 py-2 rounded-md ${
+            sortType === "highToLow" ? "bg-amber-500 text-white" : "bg-gray-200"
+          }`}
+          onClick={() => setSortType("highToLow")}
+        >
+          Sort: High to Low
+        </button>
       </div>
+
+      {/* Product Listing */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         {sortedProducts.map((category) =>
           category.items.map((product) => (
-            <ProductView key={product.id} product={product}  />
+            <ProductView
+              key={product.id}
+              product={product}
+              onAddToCart={handleAddToCart}
+              onAddToWishlist={handleAddToWishlist}
+            />
           ))
         )}
+      </div>
+
+      {/* Sidebar Component */}
+      <div className="relative z-1000">
+      <CartWishlist 
+        cart={cart}
+        wishlist={wishlist}
+        activePanel={activePanel}
+        setActivePanel={setActivePanel}
+      />
       </div>
     </div>
   );

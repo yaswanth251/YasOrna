@@ -1,145 +1,147 @@
-import React, { useState, useEffect } from "react";
-import { FaHeart, FaShoppingCart } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useMemo, useEffect } from "react";
+import ProductView from "./ProductView";
+import CartWishlist from "./CartWishlist";
 import UserHome from "./UserHome";
 import Foot from "./Foot";
 
-
-const products = [
+const initialProducts = [
   {
-    image:
-      "https://www.pngall.com/wp-content/uploads/8/Earring-PNG-Download-Image.png",
+    id: "earring-1",
+    image: "https://www.pngall.com/wp-content/uploads/8/Earring-PNG-Download-Image.png",
     title: "Gold Earrings",
     price: 4500,
   },
   {
-    image:
-      "https://clipground.com/images/png-gold-earrings-1.png",
+    id: "earring-2",
+    image: "https://clipground.com/images/png-gold-earrings-1.png",
     title: "Diamond Earrings",
     price: 13000,
   },
   {
-    image:
-      "https://www.pngmart.com/files/23/Earring-PNG-Isolated-HD.png",
+    id: "earring-3",
+    image: "https://www.pngmart.com/files/23/Earring-PNG-Isolated-HD.png",
     title: "Ruby Earrings",
     price: 8000,
   },
   {
-    image:
-      "https://static01.srikrishna.com/DealImages/7133/ZoomImages/ear193121.png",
+    id: "earring-4",
+    image: "https://static01.srikrishna.com/DealImages/7133/ZoomImages/ear193121.png",
     title: "Emerald Earrings",
     price: 9900,
   },
   {
-    image:
-      "https://www.pngmart.com/files/23/Gold-Earrings-PNG-HD-Isolated.png",
+    id: "earring-5",
+    image: "https://www.pngmart.com/files/23/Gold-Earrings-PNG-HD-Isolated.png",
     title: "Sapphire Earrings",
     price: 11500,
   },
   {
-    image:
-      "https://www.pngall.com/wp-content/uploads/8/Earring-PNG-File-Download-Free.png",
+    id: "earring-6",
+    image: "https://www.pngall.com/wp-content/uploads/8/Earring-PNG-File-Download-Free.png",
     title: "Platinum Earrings",
     price: 16000,
   },
   {
-    image:
-      "https://pnghq.com/wp-content/uploads/buy-gold-earrings-online-64053.png",
+    id: "earring-7",
+    image: "https://pnghq.com/wp-content/uploads/buy-gold-earrings-online-64053.png",
     title: "Rose Gold Earrings",
     price: 8900,
   },
   {
-    image:
-      "https://cdn0.rubylane.com/shops/1231960/Earr-614.1L.jpg",
+    id: "earring-8",
+    image: "https://cdn0.rubylane.com/shops/1231960/Earr-614.1L.jpg",
     title: "Silver Earrings",
     price: 4200,
   },
 ];
 
 function Earrings() {
-  const navigate = useNavigate();
-  const [wishlist, setWishlist] = useState([]);
   const [cart, setCart] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
+  const [sortType, setSortType] = useState(null);
+  const [activePanel, setActivePanel] = useState();
 
   useEffect(() => {
-    setWishlist(JSON.parse(localStorage.getItem("wishlist")) || []);
     setCart(JSON.parse(localStorage.getItem("cart")) || []);
+    setWishlist(JSON.parse(localStorage.getItem("wishlist")) || []);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("wishlist", JSON.stringify(wishlist));
     localStorage.setItem("cart", JSON.stringify(cart));
-  }, [wishlist, cart]);
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  }, [cart, wishlist]);
 
-  const handleAddToWishlist = (product) => {
-    if (!wishlist.some((item) => item.image === product.image)) {
-      setWishlist([...wishlist, product]);
-    }
-  };
+  const sortedProducts = useMemo(() => {
+    if (!sortType) return initialProducts;
+    return [...initialProducts].sort((a, b) =>
+      sortType === "lowToHigh" ? a.price - b.price : b.price - a.price
+    );
+  }, [sortType]);
 
   const handleAddToCart = (product) => {
-    if (!cart.some((item) => item.image === product.image)) {
-      setCart([...cart, product]);
-    }
+    setCart((prevCart) => {
+      const existing = prevCart.find((item) => item.id === product.id);
+      if (existing) {
+        return prevCart.map((item) =>
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      }
+      return [...prevCart, { ...product, quantity: 1 }];
+    });
+  };
+
+  const handleAddToWishlist = (product) => {
+    setWishlist((prevWishlist) =>
+      prevWishlist.some((item) => item.id === product.id)
+        ? prevWishlist
+        : [...prevWishlist, product]
+    );
   };
 
   return (
     <>
-      <UserHome />
-      <div className="p-4 md:p-8">
-        <button
-          onClick={() => navigate("/Merge")}
-          className="bg-amber-600 p-2 rounded-2xl text-white mb-5"
-        >
-          Back to Home
-        </button>
-        <h1 className="text-3xl text-center text-amber-800">
-          Hand Picked for You
-        </h1>
-        <hr className="opacity-25 mb-4" />
+      <div className="sticky top-0 z-50 bg-white shadow-md">
+        <UserHome />
+      </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {products.map((product, idx) => (
-            <div
-              key={idx}
-              className="bg-white shadow-2xl p-5 flex flex-col rounded-md justify-center items-center gap-2 cursor-pointer transition-transform hover:scale-105"
-              onClick={() => navigate("/DetailView", { state: { product } })}
-            >
-              <img
-                src={product.image}
-                alt={product.title}
-                className="w-[250px] h-[250px] rounded-md shadow-lg object-cover"
-              />
-              <h1>{product.title}</h1>
-              <h1>₹{product.price}/-</h1>
-              <div className="flex justify-between w-full px-4">
-                <FaHeart
-                  className={`cursor-pointer text-lg ${
-                    wishlist.some((item) => item.image === product.image)
-                      ? "text-red-500"
-                      : "text-gray-400"
-                  }`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleAddToWishlist(product);
-                  }}
-                />
-                <FaShoppingCart
-                  className={`cursor-pointer text-lg ${
-                    cart.some((item) => item.image === product.image)
-                      ? "text-green-500"
-                      : "text-gray-400"
-                  }`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleAddToCart(product);
-                  }}
-                />
-              </div>
-            </div>
+      <div className="min-h-screen py-5">
+        <h1 className="text-3xl text-center text-amber-800">Hand Picked for You</h1>
+        <hr className="opacity-25 mb-5" />
+
+        <div className="flex justify-end gap-4 mb-3 p-10">
+          <button
+            className={`px-3 py-1 rounded-md ${sortType === "lowToHigh" ? "bg-amber-500 text-white" : "bg-gray-200"}`}
+            onClick={() => setSortType("lowToHigh")}
+          >
+            Sort: Low to High
+          </button>
+          <button
+            className={`px-4 py-2 rounded-md ${sortType === "highToLow" ? "bg-amber-500 text-white" : "bg-gray-200"}`}
+            onClick={() => setSortType("highToLow")}
+          >
+            Sort: High to Low
+          </button>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {sortedProducts.map((product) => (
+            <ProductView
+              key={product.id}
+              product={product}
+              onAddToCart={handleAddToCart}
+              onAddToWishlist={handleAddToWishlist}
+            />
           ))}
         </div>
+
+        <CartWishlist
+          cart={cart}
+          wishlist={wishlist}
+          activePanel={activePanel}
+          setActivePanel={setActivePanel}
+        />
       </div>
+
       <Foot />
     </>
   );

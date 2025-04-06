@@ -1,71 +1,57 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { FaHeart, FaShoppingCart, FaCreditCard } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-export default function ProductView({
-  product,
-  onAddToCart,
-  onAddToWishlist,
-}) {
-  const [quantity, setQuantity] = useState(1);
-  const navigate = useNavigate(); // ✅ You forgot this line
+export default function ProductCard({ product, onAddToCart, onAddToWishlist }) {
+  const navigate = useNavigate();
 
-  const handleIncreaseQuantity = () => {
-    setQuantity((prev) => prev + 1);
+  const handleCardClick = () => {
+    navigate("/DetailView", { state: { product } });
   };
-
-  const handleDecreaseQuantity = () => {
-    if (quantity > 1) setQuantity((prev) => prev - 1);
-  };
-
-  const handleBuyNow = () => {
-    navigate("/Payment", { state: { product, quantity } }); // ✅ Navigating with state
-  };
- 
-  
 
   return (
-    <div className="bg-white shadow-lg p-5 flex flex-col rounded-lg justify-center items-center gap-2 cursor-pointer transition-transform hover:scale-105 w-full max-w-xs">
-      <img
-        src={product.image}
-        alt={product.title}
-        className="w-40 h-40 rounded-lg object-cover"
-      />
-      <h1 className="text-lg font-semibold text-center">{product.title}</h1>
-      <h2 className="text-xl font-bold text-amber-600">₹{product.price}/-</h2>
+    <div className="bg-white shadow-xl rounded-2xl p-4 transition-all duration-300 hover:shadow-2xl hover:scale-[1.03] flex flex-col items-center group cursor-pointer">
+      {/* Clickable Area */}
+      <div onClick={handleCardClick} className="w-full">
+        <div className="w-full h-52 flex items-center justify-center overflow-hidden rounded-xl bg-gray-50">
+          <img
+            src={product.image}
+            alt={product.title}
+            className="object-contain h-full transition-transform duration-500 group-hover:scale-110"
+          />
+        </div>
 
-      <div className="flex items-center gap-2 mt-2">
+        <div className="mt-4 w-full text-center">
+          <h2 className="text-lg font-semibold text-gray-800 truncate">{product.title}</h2>
+          <p className="text-amber-600 text-xl font-bold mt-1">₹{product.price}/-</p>
+        </div>
+      </div>
+
+      {/* Icons */}
+      <div className="flex items-center justify-center gap-6 mt-4">
         <button
-          className="px-2 py-1 bg-gray-200 rounded"
-          onClick={handleDecreaseQuantity}
+          onClick={() => onAddToWishlist(product)}
+          className="text-red-500 hover:text-red-600 transition-transform hover:scale-110"
+          title="Add to Wishlist"
         >
-          -
+          <FaHeart size={20} />
         </button>
-        <span className="text-lg font-semibold">{quantity}</span>
+
         <button
-          className="px-2 py-1 bg-gray-200 rounded"
-          onClick={handleIncreaseQuantity}
+          onClick={() => onAddToCart(product)}
+          className="text-green-500 hover:text-green-600 transition-transform hover:scale-110"
+          title="Add to Cart"
         >
-          +
+          <FaShoppingCart size={20} />
         </button>
       </div>
 
-      <div className="flex justify-between w-full px-4 mt-2">
-        <FaHeart
-          className="text-red-500 cursor-pointer text-lg hover:scale-110 transition-transform"
-          onClick={() => onAddToWishlist && onAddToWishlist(product)}
-        />
-        <FaShoppingCart
-          className="text-green-500 cursor-pointer text-lg hover:scale-110 transition-transform"
-          onClick={() => onAddToCart  && onAddToCart({ ...product, quantity })}
-        />
-      </div>
-
+      {/* Buy Now Button */}
       <button
-        onClick={handleBuyNow}
-        className="flex items-center gap-2 bg-blue-500 hover:bg-orange-600 text-white px-6 py-2 rounded-md shadow-md transition"
+        className="mt-4 px-5 py-2 w-full flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-yellow-400 text-white font-medium rounded-lg shadow-md hover:from-yellow-500 hover:to-amber-500 transition-all"
+        onClick={() => navigate("/Payment", { state: { product } })}
       >
-        <FaCreditCard /> Buy Now
+        <FaCreditCard className="text-white" />
+        Buy Now
       </button>
     </div>
   );

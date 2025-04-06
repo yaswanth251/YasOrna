@@ -1,150 +1,159 @@
-import React, { useState, useEffect } from "react";
-import { FaHeart, FaShoppingCart } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useMemo, useEffect } from "react";
+import ProductView from "./ProductView";
+import CartWishlist from "./CartWishlist";
 import UserHome from "./UserHome";
 import Foot from "./Foot";
 
-
-const products = [
+const initialProducts = [
   {
     id: "necklace-1",
-    image:
-      "https://www.pngall.com/wp-content/uploads/8/Gold-Jewellery-Necklace-PNG-Free-Download.png",
+    image: "https://www.pngall.com/wp-content/uploads/8/Gold-Jewellery-Necklace-PNG-Free-Download.png",
+    title: "Classic Gold Necklace",
     price: 79000,
   },
   {
     id: "necklace-2",
-    image:
-      "https://pnghq.com/wp-content/uploads/necklace-png-transparent-elements.png",
+    image: "https://pnghq.com/wp-content/uploads/necklace-png-transparent-elements.png",
+    title: "Royal Pearl Necklace",
     price: 75000,
   },
   {
     id: "necklace-3",
-    image:
-      "https://clipart-library.com/image_gallery2/Jewellery-PNG-Picture.png",
+    image: "https://clipart-library.com/image_gallery2/Jewellery-PNG-Picture.png",
+    title: "Antique Heritage Necklace",
     price: 80000,
   },
   {
     id: "necklace-4",
-    image:
-      "https://i.pinimg.com/originals/e0/43/3a/e0433ac5b79a2642067641e75f510a9b.png",
+    image: "https://i.pinimg.com/originals/e0/43/3a/e0433ac5b79a2642067641e75f510a9b.png",
+    title: "Temple Style Necklace",
     price: 85000,
   },
   {
     id: "necklace-5",
-    image:
-      "http://www.pngmart.com/files/1/Jewellery-Necklace-Transparent-PNG.png",
+    image: "http://www.pngmart.com/files/1/Jewellery-Necklace-Transparent-PNG.png",
+    title: "Simple Designer Necklace",
     price: 21999,
   },
   {
     id: "necklace-6",
     image: "https://www.pngmart.com/files/22/Jewelry-PNG-Isolated-HD.png",
+    title: "Platinum Fashion Necklace",
     price: 15999,
   },
   {
     id: "necklace-7",
     image: "https://purepng.com/public/uploads/large/love-pendant-ych.png",
+    title: "Heart Pendant Necklace",
     price: 69155,
   },
   {
     id: "necklace-8",
-    image:
-      "https://www.pngall.com/wp-content/uploads/8/Gold-Necklace-PNG-Picture.png",
+    image: "https://www.pngall.com/wp-content/uploads/8/Gold-Necklace-PNG-Picture.png",
+    title: "Modern Gold Necklace",
     price: 98000,
   },
   {
     id: "necklace-9",
-    image:
-      "https://www.pngarts.com/files/3/Necklace-Jewellery-Set-PNG-Image.png",
+    image: "https://www.pngarts.com/files/3/Necklace-Jewellery-Set-PNG-Image.png",
+    title: "Jewellery Set",
     price: 28999,
   },
   {
     id: "necklace-10",
     image: "https://www.pngarts.com/files/3/Jewellery-PNG-Picture.png",
+    title: "Stylish Set Necklace",
     price: 19999,
   },
 ];
 
 function Necklace() {
-  const navigate = useNavigate();
-  const [wishlist, setWishlist] = useState([]);
   const [cart, setCart] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
+  const [sortType, setSortType] = useState(null);
+  const [activePanel, setActivePanel] = useState();
 
   useEffect(() => {
-    setWishlist(JSON.parse(localStorage.getItem("wishlist")) || []);
     setCart(JSON.parse(localStorage.getItem("cart")) || []);
+    setWishlist(JSON.parse(localStorage.getItem("wishlist")) || []);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("wishlist", JSON.stringify(wishlist));
     localStorage.setItem("cart", JSON.stringify(cart));
-  }, [wishlist, cart]);
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  }, [cart, wishlist]);
 
-  const handleAddToWishlist = (product, event) => {
-    event.stopPropagation(); // Prevent click from navigating to detail page
-    if (!wishlist.some((item) => item.id === product.id)) {
-      setWishlist([...wishlist, product]);
-    }
+  const sortedProducts = useMemo(() => {
+    if (!sortType) return initialProducts;
+    return [...initialProducts].sort((a, b) =>
+      sortType === "lowToHigh" ? a.price - b.price : b.price - a.price
+    );
+  }, [sortType]);
+
+  const handleAddToCart = (product) => {
+    setCart((prevCart) => {
+      const existing = prevCart.find((item) => item.id === product.id);
+      if (existing) {
+        return prevCart.map((item) =>
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      }
+      return [...prevCart, { ...product, quantity: 1 }];
+    });
   };
 
-  const handleAddToCart = (product, event) => {
-    event.stopPropagation(); // Prevent click from navigating to detail page
-    if (!cart.some((item) => item.id === product.id)) {
-      setCart([...cart, product]);
-    }
+  const handleAddToWishlist = (product) => {
+    setWishlist((prevWishlist) =>
+      prevWishlist.some((item) => item.id === product.id)
+        ? prevWishlist
+        : [...prevWishlist, product]
+    );
   };
 
   return (
     <>
-      <UserHome />
-      <div className="p-4 md:p-8">
-        <button
-          onClick={() => navigate("/Merge")}
-          className="bg-amber-600 p-2 rounded-2xl text-white mb-5"
-        >
-          Back to Home
-        </button>
-        <h1 className="text-3xl text-center text-amber-800">
-          Hand Picked for You
-        </h1>
-        <hr className="opacity-25 mb-4" />
+      <div className="sticky top-0 z-50 bg-white shadow-md">
+        <UserHome />
+      </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
-            <div
+      <div className="min-h-screen py-5">
+        <h1 className="text-3xl text-center text-amber-800">Hand Picked for You</h1>
+        <hr className="opacity-25 mb-5" />
+
+        <div className="flex justify-end gap-4 mb-3 p-10">
+          <button
+            className={`px-3 py-1 rounded-md ${sortType === "lowToHigh" ? "bg-amber-500 text-white" : "bg-gray-200"}`}
+            onClick={() => setSortType("lowToHigh")}
+          >
+            Sort: Low to High
+          </button>
+          <button
+            className={`px-4 py-2 rounded-md ${sortType === "highToLow" ? "bg-amber-500 text-white" : "bg-gray-200"}`}
+            onClick={() => setSortType("highToLow")}
+          >
+            Sort: High to Low
+          </button>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {sortedProducts.map((product) => (
+            <ProductView
               key={product.id}
-              className="bg-white shadow-2xl p-5 flex flex-col rounded-md justify-center items-center gap-2 cursor-pointer transition-transform hover:scale-105"
-              onClick={() => navigate("/DetailView", { state: { product } })}
-            >
-              <img
-                src={product.image}
-                alt={product.title}
-                className="w-[250px] h-[250px] rounded-md shadow-lg object-cover"
-              />
-              <h1 className="font-semibold text-lg">{product.title}</h1>
-              <h1 className="text-gray-700">₹{product.price}/-</h1>
-              <div className="flex justify-between w-full px-4">
-                <FaHeart
-                  className={`cursor-pointer text-lg ${
-                    wishlist.some((item) => item.id === product.id)
-                      ? "text-red-500"
-                      : "text-gray-400"
-                  }`}
-                  onClick={(e) => handleAddToWishlist(product, e)}
-                />
-                <FaShoppingCart
-                  className={`cursor-pointer text-lg ${
-                    cart.some((item) => item.id === product.id)
-                      ? "text-green-500"
-                      : "text-gray-400"
-                  }`}
-                  onClick={(e) => handleAddToCart(product, e)}
-                />
-              </div>
-            </div>
+              product={product}
+              onAddToCart={handleAddToCart}
+              onAddToWishlist={handleAddToWishlist}
+            />
           ))}
         </div>
+
+        <CartWishlist
+          cart={cart}
+          wishlist={wishlist}
+          activePanel={activePanel}
+          setActivePanel={setActivePanel}
+        />
       </div>
+
       <Foot />
     </>
   );

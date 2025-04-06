@@ -111,25 +111,9 @@ export default function UserHome({ name, email }) {
                 className="flex flex-col items-center cursor-pointer"
                 onClick={() => setShowAccount(!showAccount)}
               >
-                <FaRegUser size={22} />
+                <FaRegUser size={25} />
                 <span className="text-[10px]">ACCOUNT</span>
               </div>
-
-              {/* Wishlist */}
-              <Link to="/Wishlist" className="relative">
-                <FaHeart size={22} />
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
-                  0
-                </span>
-              </Link>
-
-              {/* Cart */}
-              <Link to="/Cart" className="relative">
-                <FaShoppingCart size={22} />
-                <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-1 rounded-full">
-                  0
-                </span>
-              </Link>
             </div>
           </div>
 
@@ -154,20 +138,7 @@ export default function UserHome({ name, email }) {
                 </div>
 
                 {/* Wishlist */}
-                <Link to="/Wishlist" className="relative">
-                  <FaHeart size={22} />
-                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
-                    0
-                  </span>
-                </Link>
-
-                {/* Cart */}
-                <Link to="/Cart" className="relative">
-                  <FaShoppingCart size={22} />
-                  <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-1 rounded-full">
-                    0
-                  </span>
-                </Link>
+                
 
                 {/* Mobile Menu Button */}
                 <button

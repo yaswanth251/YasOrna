@@ -21,6 +21,8 @@ export default function ProductView({
   const handleBuyNow = () => {
     navigate("/Payment", { state: { product, quantity } }); // ✅ Navigating with state
   };
+ 
+  
 
   return (
     <div className="bg-white shadow-lg p-5 flex flex-col rounded-lg justify-center items-center gap-2 cursor-pointer transition-transform hover:scale-105 w-full max-w-xs">
@@ -55,7 +57,7 @@ export default function ProductView({
         />
         <FaShoppingCart
           className="text-green-500 cursor-pointer text-lg hover:scale-110 transition-transform"
-          onClick={() => onAddToCart && onAddToCart({ ...product, quantity })}
+          onClick={() => onAddToCart  && onAddToCart({ ...product, quantity })}
         />
       </div>
 

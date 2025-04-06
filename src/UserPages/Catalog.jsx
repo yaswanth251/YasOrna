@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import ProductView from "./ProductView";
 
 const initialProducts = [
@@ -39,10 +39,10 @@ const initialProducts = [
 
 
 const Catalog = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [sortType, setSortType] = useState(null);
-  const [cart, setCart] = useState([]);
-  const [wishlist, setWishlist] = useState([]);
+  // const [cart, setCart] = useState([]);
+  // const [wishlist, setWishlist] = useState([]);
 
   const sortedProducts = useMemo(() => {
     if (!sortType) return initialProducts;
@@ -54,13 +54,13 @@ const Catalog = () => {
     }));
   }, [sortType]);
 
-  const handleAddToCart = (product) => {
-    setCart((prevCart) => [...prevCart, product]);
-  };
+  // const handleAddToCart = (product) => {
+  //   setCart((prevCart) => [...prevCart, product]);
+  // };
 
-  const handleAddToWishlist = (product) => {
-    setWishlist((prevWishlist) => [...prevWishlist, product]);
-  };
+  // const handleAddToWishlist = (product) => {
+  //   setWishlist((prevWishlist) => [...prevWishlist, product]);
+  // };
 
   return (
     <div className="min-h-screen py-5">
@@ -73,7 +73,7 @@ const Catalog = () => {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         {sortedProducts.map((category) =>
           category.items.map((product) => (
-            <ProductView key={product.id} product={product} onAddToCart={handleAddToCart} onAddToWishlist={handleAddToWishlist} />
+            <ProductView key={product.id} product={product}  />
           ))
         )}
       </div>

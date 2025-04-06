@@ -92,7 +92,7 @@ export default function UserHome({ name, email }) {
               />
               <div
                 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
-                onClick={() => navigate("/search")}
+                onClick={() => navigate("/VisualSearch")}
               >
                 <BiCamera size={20} />
               </div>
@@ -190,7 +190,7 @@ export default function UserHome({ name, email }) {
               />
               <div
                 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
-                onClick={() => navigate("/search")}
+                onClick={() => navigate("/VisualSearch")}
               >
                 <BiCamera size={20} />
               </div>

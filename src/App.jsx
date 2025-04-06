@@ -23,6 +23,7 @@ import Cart from "./UserPages/Cart";
 import Wishlist from "./UserPages/Wishlist";
 import DetailView from "./UserPages/DetailView";
 import LoginIntro from "./pages/LoginIntro";
+import Payment from "./UserPages/Payment";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
       <Route path="/Earrings" element={<Earrings />} />
       <Route path="/Bangles" element={<Bangles />} />
       <Route path="/LoginIntro" element={<LoginIntro />} />
+      <Route path="/Payment" element={<Payment />}/>
     </Routes>
   );
 }

@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { FaHeart, FaShoppingCart } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { FaHeart, FaShoppingCart, FaCreditCard } from "react-icons/fa";
 
 export default function ProductView({
   product,
   onAddToCart,
   onAddToWishlist,
-  onBuyNow,
 }) {
   const [quantity, setQuantity] = useState(1);
+  const navigate = useNavigate(); // ✅ You forgot this line
 
   const handleIncreaseQuantity = () => {
     setQuantity((prev) => prev + 1);
@@ -15,6 +16,10 @@ export default function ProductView({
 
   const handleDecreaseQuantity = () => {
     if (quantity > 1) setQuantity((prev) => prev - 1);
+  };
+
+  const handleBuyNow = () => {
+    navigate("/Payment", { state: { product, quantity } }); // ✅ Navigating with state
   };
 
   return (
@@ -55,10 +60,10 @@ export default function ProductView({
       </div>
 
       <button
-        className="mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition"
-        onClick={() => onBuyNow(product, quantity)}
+        onClick={handleBuyNow}
+        className="flex items-center gap-2 bg-blue-500 hover:bg-orange-600 text-white px-6 py-2 rounded-md shadow-md transition"
       >
-        Buy Now
+        <FaCreditCard /> Buy Now
       </button>
     </div>
   );

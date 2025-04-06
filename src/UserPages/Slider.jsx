@@ -7,7 +7,7 @@ import "swiper/css/effect-fade";
 
 
 const images = [
-  { url: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/bf288e152898429.6326071533772.jpg", alt: "Elegant Wedding Jewellery" },
+  { url: "https://i.pinimg.com/originals/05/e0/7a/05e07a75023dcd2c5356bf0fa2fe8140.jpg", alt: "Elegant Wedding Jewellery" },
   { url: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/c61f35152898429.632607152f7c2.jpg", alt: "Exclusive Necklace Set" },
   { url: "https://cdn.shopify.com/s/files/1/1115/6326/files/B1004_Diamonds_banner_2_thumb_61466c50-3bfb-4d54-a2b3-205219e956f5.jpg?v=1511876014", alt: "Elegant Wedding Jewellery" },
   { url: "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/b08490152898429.63260715327fb.jpg", alt: "Elegant Wedding Jewellery" },

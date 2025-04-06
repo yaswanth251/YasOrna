@@ -37,6 +37,30 @@ export default function UserHome({ name, email }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+
+
+
+
+  const handleSearch = (e) => {
+    if (e.key === "Enter") {
+      const value = inputRef.current.value.toLowerCase();
+
+      if (value.includes("ring")) {
+        navigate("/Ring");
+      } else if (value.includes("necklace")) {
+        navigate("/Necklace");
+      } else if (value.includes("earrings")) {
+        navigate("/Earrings");
+      } else if (value.includes("bangle") || value.includes("bangles")) {
+        navigate("/Bangles");
+      } else {
+        navigate("/Merge", { state: { query: value } }); // fallback search page
+      }
+    }
+  };
+
+
+
   return (
     <>
       <div className="relative">
@@ -64,6 +88,7 @@ export default function UserHome({ name, email }) {
                 type="text"
                 placeholder="Search for Jewelry..."
                 className="w-full px-4 py-2 pl-10 pr-10 rounded bg-gray-50 focus:outline-none shadow-sm"
+                onClick={handleSearch}
               />
               <div
                 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
@@ -94,7 +119,7 @@ export default function UserHome({ name, email }) {
               <Link to="/Wishlist" className="relative">
                 <FaHeart size={22} />
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
-                  3
+                  0
                 </span>
               </Link>
 
@@ -102,7 +127,7 @@ export default function UserHome({ name, email }) {
               <Link to="/Cart" className="relative">
                 <FaShoppingCart size={22} />
                 <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-1 rounded-full">
-                  2
+                  0
                 </span>
               </Link>
             </div>
@@ -132,7 +157,7 @@ export default function UserHome({ name, email }) {
                 <Link to="/Wishlist" className="relative">
                   <FaHeart size={22} />
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
-                    3
+                    0
                   </span>
                 </Link>
 
@@ -140,7 +165,7 @@ export default function UserHome({ name, email }) {
                 <Link to="/Cart" className="relative">
                   <FaShoppingCart size={22} />
                   <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-1 rounded-full">
-                    2
+                    0
                   </span>
                 </Link>
 
@@ -161,6 +186,7 @@ export default function UserHome({ name, email }) {
                 type="text"
                 placeholder="Search for Jewelry..."
                 className="w-full px-4 py-2 pl-10 pr-10 rounded bg-gray-50 focus:outline-none shadow-sm"
+                onKeyDown={handleSearch}
               />
               <div
                 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"

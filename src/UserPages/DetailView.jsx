@@ -37,11 +37,9 @@ const DetailView = () => {
       </div>
     );
   }
-
   const handleBuyNow = () => {
     navigate("/Payment", { state: { product } });
   };
-
   return (
     <>
       <UserHome />

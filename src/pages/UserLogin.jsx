@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Mail from "../assets/Images/mail.png";
+// import Mail from "../assets/Images/mail.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -103,7 +103,7 @@ function UserLogin() {
           <button className="hover:text-amber-400 transition">
             Contact Us
           </button>
-          <img src={Mail} className="w-10 h-10" alt="Mail Icon" />
+          <img src={"https://static.vecteezy.com/system/resources/previews/020/964/377/non_2x/gmail-mail-icon-for-web-design-free-png.png"} className="w-10 h-10" alt="Mail Icon" />
         </div>
       </div>
 

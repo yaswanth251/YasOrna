@@ -2,14 +2,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
-import banner1 from "../assets/Images/products/Offers/ban6.webp";
-import banner4 from "../assets/Images/products/Offers/ban4.webp";
-import banner5 from "../assets/Images/products/Offers/ban5.png";
+// import banner1 from "../assets/Images/products/Offers/ban6.webp";
+// import banner4 from "../assets/Images/products/Offers/ban4.webp";
+// import banner5 from "../assets/Images/products/Offers/ban5.png";
 
 const images = [
-  { url: banner4, alt: "Elegant Wedding Jewellery" },
-  { url: banner5, alt: "Elegant Wedding Jewellery" },
-  { url: "https://mir-s3-cdn-cf.behance.net/project_modules/1400/86a66215440941.56291278dce76.jpg", alt: "Bridal Jewelry Collection" },
+  { url: "https://i.pinimg.com/originals/e2/e9/e5/e2e9e506991481015588a7df31c825aa.jpg", alt: "Elegant Wedding Jewellery" },
+  { url: "https://i.pinimg.com/originals/05/e0/7a/05e07a75023dcd2c5356bf0fa2fe8140.jpg", alt: "Elegant Wedding Jewellery" },
+  { url: "https://cdn.shopify.com/s/files/1/1115/6326/files/B1003_rings_banner_txt1_green_thumb_ff0f17ba-18af-48a8-8a62-ca99613fd62a.jpg?v=1511449039", alt: "Bridal Jewelry Collection" },
 ];
 
 function Offers() {
@@ -42,7 +42,7 @@ function Offers() {
             <img
               src={image.url}
               alt={image.alt}
-              className="w-full h-auto max-h-[500px] object-cover rounded-lg shadow-lg"
+              className="w-full h-auto max-h-[480px] object-cover rounded-lg shadow-lg"
             />
           </SwiperSlide>
         ))}

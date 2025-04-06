@@ -49,68 +49,132 @@ export default function UserHome({ name, email }) {
         </div>
 
         {/* Navbar */}
-        <nav className="relative flex items-center justify-between px-4 md:px-6 py-3 bg-gray-200 shadow-md">
-          {/* Logo */}
-          <div className="text-3xl font-bold text-orange-950 flex items-center">
-            <span className="text-4xl">Y</span>asOrna
+        <nav className="bg-gray-200 shadow-md px-4 py-3">
+          {/* Desktop View: Logo, Search Bar, Icons in One Row */}
+          <div className="hidden md:flex items-center justify-between gap-4">
+            {/* Logo */}
+            <div className="text-3xl font-bold text-orange-950 flex items-center min-w-max">
+              <span className="text-4xl">Y</span>asOrna
+            </div>
+
+            {/* Search Bar */}
+            <div className="relative w-full max-w-2xl">
+              <input
+                ref={inputRef}
+                type="text"
+                placeholder="Search for Jewelry..."
+                className="w-full px-4 py-2 pl-10 pr-10 rounded bg-gray-50 focus:outline-none shadow-sm"
+              />
+              <div
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
+                onClick={() => navigate("/search")}
+              >
+                <BiCamera size={20} />
+              </div>
+              <div
+                className="absolute bg-white p-[10px] z-100 rounded cursor-pointer text-gray-500 transform -translate-y-1/2 right-3 top-[50%]"
+                onClick={() => inputRef.current?.focus()}
+              >
+                <FaSearch size={20} />
+              </div>
+            </div>
+
+            {/* Icons */}
+            <div className="flex items-center space-x-4 text-[#642828] min-w-max">
+              {/* Account */}
+              <div
+                className="flex flex-col items-center cursor-pointer"
+                onClick={() => setShowAccount(!showAccount)}
+              >
+                <FaRegUser size={22} />
+                <span className="text-[10px]">ACCOUNT</span>
+              </div>
+
+              {/* Wishlist */}
+              <Link to="/Wishlist" className="relative">
+                <FaHeart size={22} />
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
+                  3
+                </span>
+              </Link>
+
+              {/* Cart */}
+              <Link to="/Cart" className="relative">
+                <FaShoppingCart size={22} />
+                <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-1 rounded-full">
+                  2
+                </span>
+              </Link>
+            </div>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-2xl text-gray-700"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? <FaTimes /> : <FaBars />}
-          </button>
+          {/* Mobile View */}
+          <div className="md:hidden space-y-3">
+            {/* Top Row: Logo and Icons */}
+            <div className="flex justify-between items-center">
+              {/* Logo */}
+              <div className="text-3xl font-bold text-orange-950 flex items-center">
+                <span className="text-4xl">Y</span>asOrna
+              </div>
 
-          {/* Search Bar */}
-          <div className="hidden md:flex relative flex-1 mx-4">
-            <input
-              ref={inputRef}
-              type="text"
-              placeholder="Search for Jewelry..."
-              className="w-full md:w-96 px-4 py-2 pl-10 pr-10 rounded bg-gray-50 focus:outline-none shadow-sm"
-            />
-            <div
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
-              onClick={() => navigate("/search")}
-            >
-              <BiCamera size={20} />
+              {/* Icons */}
+              <div className="flex items-center space-x-4 text-[#642828]">
+                {/* Account */}
+                <div
+                  className="flex flex-col items-center cursor-pointer"
+                  onClick={() => setShowAccount(!showAccount)}
+                >
+                  <FaRegUser size={22} />
+                  <span className="text-[10px]">ACCOUNT</span>
+                </div>
+
+                {/* Wishlist */}
+                <Link to="/Wishlist" className="relative">
+                  <FaHeart size={22} />
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
+                    3
+                  </span>
+                </Link>
+
+                {/* Cart */}
+                <Link to="/Cart" className="relative">
+                  <FaShoppingCart size={22} />
+                  <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-1 rounded-full">
+                    2
+                  </span>
+                </Link>
+
+                {/* Mobile Menu Button */}
+                <button
+                  className="text-xl text-gray-700 ml-2"
+                  onClick={() => setMenuOpen(!menuOpen)}
+                >
+                  {menuOpen ? <FaTimes /> : <FaBars />}
+                </button>
+              </div>
             </div>
-            <div
-              className="absolute bg-white p-[10px] z-100 rounded cursor-pointer text-gray-500 transform -translate-y-1/2 left-[23rem] top-[20px]"
-              onClick={() => inputRef.current?.focus()}
-            >
-              <FaSearch size={20} />
+
+            {/* Search Bar */}
+            <div className="flex relative w-full">
+              <input
+                ref={inputRef}
+                type="text"
+                placeholder="Search for Jewelry..."
+                className="w-full px-4 py-2 pl-10 pr-10 rounded bg-gray-50 focus:outline-none shadow-sm"
+              />
+              <div
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
+                onClick={() => navigate("/search")}
+              >
+                <BiCamera size={20} />
+              </div>
+              <div
+                className="absolute bg-white p-[10px] z-100 rounded cursor-pointer text-gray-500 transform -translate-y-1/2 right-3 top-[50%]"
+                onClick={() => inputRef.current?.focus()}
+              >
+                <FaSearch size={20} />
+              </div>
             </div>
-          </div>
-
-          {/* Icons Section */}
-          <div className="hidden md:flex items-center space-x-4 text-[#642828]">
-            {/* Account */}
-            <div
-              className="relative flex flex-col items-center cursor-pointer"
-              onClick={() => setShowAccount(!showAccount)}
-            >
-              <FaRegUser size={24} />
-              <span className="text-xs hidden md:block">ACCOUNT</span>
-            </div>
-
-            {/* Wishlist */}
-            <Link to="/Wishlist" className="relative">
-              <FaHeart size={24} />
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
-                3
-              </span>
-            </Link>
-
-            {/* Cart */}
-            <Link to="/Cart" className="relative">
-              <FaShoppingCart size={24} />
-              <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-1 rounded-full">
-                2
-              </span>
-            </Link>
           </div>
         </nav>
 

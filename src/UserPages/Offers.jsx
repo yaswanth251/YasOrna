@@ -9,7 +9,7 @@ import banner5 from "../assets/Images/products/Offers/ban5.png";
 const images = [
   { url: banner4, alt: "Elegant Wedding Jewellery" },
   { url: banner5, alt: "Elegant Wedding Jewellery" },
-  { url: banner1, alt: "Bridal Jewelry Collection" },
+  { url: "https://mir-s3-cdn-cf.behance.net/project_modules/1400/86a66215440941.56291278dce76.jpg", alt: "Bridal Jewelry Collection" },
 ];
 
 function Offers() {

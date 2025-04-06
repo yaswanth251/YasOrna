@@ -7,10 +7,10 @@ import "swiper/css/effect-fade";
 
 
 const images = [
-  { url: "https://mir-s3-cdn-cf.behance.net/project_modules/1400/934a2b88873337.5de56582a78a5.png", alt: "Exclusive Necklace Set" },
+  { url: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/bf288e152898429.6326071533772.jpg", alt: "Elegant Wedding Jewellery" },
+  { url: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/c61f35152898429.632607152f7c2.jpg", alt: "Exclusive Necklace Set" },
   { url: "https://cdn.shopify.com/s/files/1/1115/6326/files/B1004_Diamonds_banner_2_thumb_61466c50-3bfb-4d54-a2b3-205219e956f5.jpg?v=1511876014", alt: "Elegant Wedding Jewellery" },
-  { url: "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/4276fe171225559.646b8933ea575.jpg", alt: "Elegant Wedding Jewellery" },
-  { url: "https://mir-s3-cdn-cf.behance.net/project_modules/1400/99bfd6152898429.632604445de58.jpg", alt: "Elegant Wedding Jewellery" },
+  { url: "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/b08490152898429.63260715327fb.jpg", alt: "Elegant Wedding Jewellery" },
   { url: "https://i.pinimg.com/originals/65/a4/62/65a4628cd306b8425a59feae2c99d0ae.jpg", alt: "Bridal Jewelry Collection" },
 ];
 

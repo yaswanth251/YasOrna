@@ -35,15 +35,14 @@ function UserLogin() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "https://yasorna-backend-production.up.railway.app/login",
-        { email, password }
-      );
+      const response = await axios.post("https://yasorna-backend-production.up.railway.app/login",{
+        email,
+        password 
+      });
 
       if (response.data && response.data.name) {
         const { name } = response.data; // Extract name from response
@@ -52,11 +51,11 @@ function UserLogin() {
         alert("Login Successful!");
         navigate("/Merge", { state: { name, email } }); // Pass name and email to the next page
       } else {
-        setError("Login Failed! Name not found.");
+        alert("Login Failed! Name not found.");
       }
     } catch (err) {
       console.error("Login Failed:", err);
-      setError("Login Failed! Check your credentials.");
+      alert("Login Failed! Check your credentials.");
     }
   };
 

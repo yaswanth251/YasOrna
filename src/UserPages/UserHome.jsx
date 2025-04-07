@@ -18,13 +18,20 @@ import Catogery from "./Catogery";
 import Offers from "./Offers";
 
 export default function UserHome({ name, email }) {
-  const [showAccount, setShowAccount] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  // const [activePanel, setActivePanel] = useState(null);
+
   const inputRef = useRef(null);
   const dropdownRef = useRef(null);
+
+  const [showAccount, setShowAccount] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const navigate = useNavigate();
 
-  const handleLogout = () => navigate("/UserLogin");
+  const handleLogout = () => {
+    navigate("/UserLogin");
+  };
+
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -223,7 +230,7 @@ export default function UserHome({ name, email }) {
           <Link to="/Necklace" className="hover:underline">
             Necklace
           </Link>
-          <Link to="/Bangles" className="hover:underline">
+          <Link to={`/Necklace?name=${name}&email=${email}`} className="hover:underline">
             Bangles
           </Link>
           <Link to="/Earrings" className="hover:underline">

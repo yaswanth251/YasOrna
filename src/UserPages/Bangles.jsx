@@ -66,7 +66,7 @@ const initialProducts = [
 ];
 
 
-function Bangles() {
+function Bangles({ name, email }) {
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
   const [sortType, setSortType] = useState(null);
@@ -102,7 +102,7 @@ function Bangles() {
   return (
     <>
     <div className="sticky top-0 z-50 bg-white shadow-md">
-    <UserHome />
+    <UserHome name={name} email={email}/>
   </div>
 
     <div className="min-h-screen py-5">

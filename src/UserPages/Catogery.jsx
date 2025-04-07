@@ -75,7 +75,7 @@ const CategoryCard = ({ name, image }) => {
       navigate(navigationMap[name]);
     }
   };
-
+  
   return (
     <div
       className="flex flex-col items-center bg-white rounded-2xl shadow-lg overflow-hidden h-[230px] w-full sm:w-[230px] cursor-pointer transform transition duration-300 hover:scale-105"

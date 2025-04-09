@@ -156,7 +156,6 @@ export default function UserHome({ name, email }) {
               />
               <a
                 href="https://yasorna-visualsearch.streamlit.app/"
-                target="_blank"
                 rel="noopener noreferrer"
                 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
               >

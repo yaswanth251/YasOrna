@@ -283,7 +283,6 @@ export default function AdminHome() {
           <h2 className="text-xl font-semibold mb-4">
             {editingIndex !== null ? "Edit Product" : "Add New Product"}
           </h2>
-
           <input
             type="text"
             name="title"

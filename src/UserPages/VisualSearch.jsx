@@ -1,19 +1,18 @@
-import React from 'react'
-import UserHome from './UserHome'
-import Foot from './Foot'
+import React from "react";
 
-function VisualSearch() {
+const VisualSearch = () => {
   return (
-    <>
-    <UserHome />
-    <iframe src="" frameborder="0">
-    </iframe>
+    <div style={{ height: "100vh", width: "100%" }}>
+      <iframe
+        src="https://yasorna-visualsearch.streamlit.app/"
+        title="Visual Search"
+        width="100%"
+        height="100%"
+        frameBorder="0"
+        allowFullScreen
+      />
+    </div>
+  );
+};
 
-
-
-    <Foot />  
-    </>
-  )
-}
-
-export default VisualSearch
+export default VisualSearch;

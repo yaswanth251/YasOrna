@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Foot from "./Foot";
-import Catalog from "./Catogery";
+import VisualSearch from "./VisualSearch";
 import {
   FaSearch,
   FaRegUser,
@@ -31,8 +30,6 @@ export default function UserHome({ name, email }) {
   const handleLogout = () => {
     navigate("/UserLogin");
   };
-
-
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -43,11 +40,6 @@ export default function UserHome({ name, email }) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-
-
-
-
   const handleSearch = (e) => {
     if (e.key === "Enter") {
       const value = inputRef.current.value.toLowerCase();
@@ -66,8 +58,6 @@ export default function UserHome({ name, email }) {
     }
   };
 
-
-
   return (
     <>
       <div className="relative">
@@ -78,7 +68,6 @@ export default function UserHome({ name, email }) {
             Shop
           </button>
         </div>
-
         {/* Navbar */}
         <nav className="bg-gray-200 shadow-md px-4 py-3">
           {/* Desktop View: Logo, Search Bar, Icons in One Row */}
@@ -87,7 +76,6 @@ export default function UserHome({ name, email }) {
             <div className="text-3xl font-bold text-orange-950 flex items-center min-w-max">
               <span className="text-4xl">Y</span>asOrna
             </div>
-
             {/* Search Bar */}
             <div className="relative w-full max-w-2xl">
               <input
@@ -97,12 +85,14 @@ export default function UserHome({ name, email }) {
                 className="w-full px-4 py-2 pl-10 pr-10 rounded bg-gray-50 focus:outline-none shadow-sm"
                 onClick={handleSearch}
               />
-              <div
+              <a
+                href="https://yasorna-visualsearch.streamlit.app/"
+                rel="noopener noreferrer"
                 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
-                onClick={() => navigate("/VisualSearch")}
               >
                 <BiCamera size={20} />
-              </div>
+              </a>
+
               <div
                 className="absolute bg-white p-[10px] z-100 rounded cursor-pointer text-gray-500 transform -translate-y-1/2 right-3 top-[50%]"
                 onClick={() => inputRef.current?.focus()}
@@ -110,7 +100,6 @@ export default function UserHome({ name, email }) {
                 <FaSearch size={20} />
               </div>
             </div>
-
             {/* Icons */}
             <div className="flex items-center space-x-4 text-[#642828] min-w-max">
               {/* Account */}
@@ -145,7 +134,6 @@ export default function UserHome({ name, email }) {
                 </div>
 
                 {/* Wishlist */}
-                
 
                 {/* Mobile Menu Button */}
                 <button
@@ -186,7 +174,7 @@ export default function UserHome({ name, email }) {
         {showAccount && (
           <div
             ref={dropdownRef}
-            className="absolute top-14 right-4 bg-white p-4 shadow-lg rounded-lg w-64"
+            className="absolute top-22 right-4 bg-white p-4 shadow-lg rounded-lg w-64"
           >
             <button
               onClick={handleLogout}
@@ -230,7 +218,10 @@ export default function UserHome({ name, email }) {
           <Link to="/Necklace" className="hover:underline">
             Necklace
           </Link>
-          <Link to={`/Necklace?name=${name}&email=${email}`} className="hover:underline">
+          <Link
+            to={`/Necklace?name=${name}&email=${email}`}
+            className="hover:underline"
+          >
             Bangles
           </Link>
           <Link to="/Earrings" className="hover:underline">

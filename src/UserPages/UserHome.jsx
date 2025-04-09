@@ -154,12 +154,15 @@ export default function UserHome({ name, email }) {
                 className="w-full px-4 py-2 pl-10 pr-10 rounded bg-gray-50 focus:outline-none shadow-sm"
                 onKeyDown={handleSearch}
               />
-              <div
+              <a
+                href="https://yasorna-visualsearch.streamlit.app/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
-                onClick={() => navigate("/VisualSearch")}
               >
                 <BiCamera size={20} />
-              </div>
+              </a>
+
               <div
                 className="absolute bg-white p-[10px] z-100 rounded cursor-pointer text-gray-500 transform -translate-y-1/2 right-3 top-[50%]"
                 onClick={() => inputRef.current?.focus()}

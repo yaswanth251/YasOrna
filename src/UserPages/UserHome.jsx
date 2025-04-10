@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import VisualSearch from "./VisualSearch";
+// import VisualSearch from "./VisualSearch";
 import {
   FaSearch,
   FaRegUser,

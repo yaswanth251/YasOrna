@@ -19,12 +19,10 @@ import Ring from "./UserPages/Ring";
 import Necklace from "./UserPages/Necklace";
 import Bangles from "./UserPages/Bangles";
 import Earrings from "./UserPages/Earrings";
-import Cart from "./UserPages/Cart";
-import Wishlist from "./UserPages/Wishlist";
 import DetailView from "./UserPages/DetailView";
 import LoginIntro from "./pages/LoginIntro";
 import Payment from "./UserPages/Payment";
-import VisualSearch from "./UserPages/VisualSearch";
+// import VisualSearch from "./UserPages/VisualSearch";
 
 function App() {
   return (
@@ -34,6 +32,7 @@ function App() {
       <Route path="/AdminRegister" element={<AdminRegister />} />
       <Route path="/AdminLogin" element={<AdminLogin />} />
       <Route path="/AdminHome" element={<AdminHome />} />
+      <Route path="/AdminNav" element={<AdminNav />} />
       <Route path="/UserRegister" element={<UserRegister />} />
       <Route path="/UserLogin" element={<UserLogin />} />
       <Route path="/UserHome" element={<UserHome />} />
@@ -42,16 +41,14 @@ function App() {
       <Route path="/Catalog" element={<Catalog />} />
       <Route path="/Offers" element={<Offers />} />
       <Route path="/Foot" element={<Foot />} />
-      <Route path="/Cart" element={<Cart />} />
       <Route path="/DetailView" element={<DetailView />} />
-      <Route path="/Wishlist" element={<Wishlist />} />
       <Route path="/Ring" element={<Ring />} />
       <Route path="/Necklace" element={<Necklace />} />
       <Route path="/Earrings" element={<Earrings />} />
       <Route path="/Bangles" element={<Bangles />} />
       <Route path="/LoginIntro" element={<LoginIntro />} />
       <Route path="/Payment" element={<Payment />}/>
-      <Route path="/VisualSearch" element={<VisualSearch />}/>
+      {/* <Route path="/VisualSearch" element={<VisualSearch />}/> */}
     </Routes>
   );
 }

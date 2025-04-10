@@ -4,7 +4,7 @@ import { FaShoppingCart, FaHeart, FaCreditCard } from "react-icons/fa";
 import UserHome from "./UserHome";
 import Foot from "./Foot";
 
-const similarProducts = [
+const BestSellingProducts = [
   {
     id: 2,
     image: "https://www.pngarts.com/files/3/Necklace-Jewellery-Set-PNG-Image.png",
@@ -74,7 +74,6 @@ const DetailView = () => {
     );
   }
 
-
   const handleBuyNow = () => {
     navigate("/Payment", { state: { product } });
   };
@@ -140,9 +139,9 @@ const DetailView = () => {
 
       {/* Similar Products Section */}
       <div className="mt-12 mx-auto max-w-6xl p-6">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">Similar Products</h2>
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">Best Selling Products🪄</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {similarProducts.map((item) => (
+          {BestSellingProducts.map((item) => (
             <div
               key={item.id}
               className="bg-white shadow-2xl p-5 flex flex-col rounded-md justify-center items-center gap-2 cursor-pointer transition-transform hover:scale-105"
@@ -155,6 +154,13 @@ const DetailView = () => {
               />
               <h1 className="font-semibold">{item.title}</h1>
               <h1 className="text-gray-700">₹{item.price}/-</h1>
+
+              {/* Add Best Seller Image Label */}
+              <img
+                src="https://png.pngtree.com/png-clipart/20220306/original/pngtree-badge-best-seller-icon-vector-png-image_7416389.png"
+                alt="Best Seller"
+                className="mt-2 w-24 h-auto"
+              />
             </div>
           ))}
         </div>

@@ -18,6 +18,10 @@ function AdminRegister() {
       alert("Password must be at least 6 characters long.");
       return;
     }
+    if (!/^\d{10}$/.test(mobile)) {  // Mobile number validation (10 digits)
+      setError("Please enter a valid 10-digit mobile number.");
+      return;
+  }
 
     if (password !== confirmPassword) {
       alert("Passwords do not match!");

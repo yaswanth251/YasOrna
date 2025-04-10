@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-// import Mail from "../assets/Images/mail.png";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 // Import images dynamically
-
 const images = [
   { url: "https://i.pinimg.com/originals/65/a4/62/65a4628cd306b8425a59feae2c99d0ae.jpg", alt: "Bridal Jewelry Collection" },
   { url: "https://mir-s3-cdn-cf.behance.net/project_modules/1400/934a2b88873337.5de56582a78a5.png", alt: "Exclusive Necklace Set" },
@@ -22,6 +20,7 @@ function UserRegister() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");  // State for mobile field
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -41,19 +40,25 @@ function UserRegister() {
         return;
     }
 
+    if (!/^\d{10}$/.test(mobile)) {  // Mobile number validation (10 digits)
+        setError("Please enter a valid 10-digit mobile number.");
+        return;
+    }
+
     try {
         // Make a request to register the user
-        const response = await axios.post("https://yasorna-backend-production.up.railway.app/userregister", {
+        const response = await axios.post("https://yasorna-backend-production.up.railway.app/adminregister", {
             name,
             email,
+            mobile,  // Sending mobile number to the backend
             password,
         });
 
         console.log("Registration Successful:", response.data);
         alert("Registration Successful!");
 
-        // Redirect user and pass name & email to next page
-        navigate("/Merge", { state: { name: response.data.name, email: response.data.email } });
+        // Redirect user and pass name, email, and mobile to the next page
+        navigate("/Merge", { state: { name: response.data.name, email: response.data.email, mobile: response.data.mobile } });
 
     } catch (error) {
         console.error("Registration Failed:", error);
@@ -69,7 +74,6 @@ function UserRegister() {
         }
     }
 };
-
 
   return (
     <div className="relative h-screen w-screen">
@@ -118,10 +122,8 @@ function UserRegister() {
 
       {/* Main Content */}
       <div className="relative flex flex-col justify-center text-center gap-5 items-center h-[70vh]">
-        {/* <div className="text-white text-5xl z-20">YasOrna</div> */}
         <div
           className=" bg-gray-600 z-20 flex flex-col w-[400px] h-max rounded-lg shadow-lg p-5"
-          
         >
           <h1 className="font-bold text-3xl text-red-300">User SignUp</h1>
 
@@ -135,6 +137,7 @@ function UserRegister() {
               <div className="flex flex-col text-left font-bold text-white items-start gap-3.5">
                 <label>Name</label>
                 <label>E-mail</label>
+                <label>Mobile</label> {/* Mobile Label */}
                 <label>Password</label>
                 <label>Re-Enter Password</label>
               </div>
@@ -153,6 +156,14 @@ function UserRegister() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   placeholder="your@email.com"
+                  className="bg-orange-300 rounded p-0.5 text-center outline-0"
+                />
+                <input
+                  type="text"
+                  value={mobile}
+                  onChange={(e) => setMobile(e.target.value)}
+                  required
+                  placeholder="Your Mobile Number"
                   className="bg-orange-300 rounded p-0.5 text-center outline-0"
                 />
                 <input

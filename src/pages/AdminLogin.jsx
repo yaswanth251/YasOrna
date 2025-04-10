@@ -5,21 +5,25 @@ import axios from "axios";
 function AdminLogin() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState(""); // New state for mobile
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Send email, mobile, and password to backend
       const response = await axios.post("https://yasorna-backend-production.up.railway.app/adminlogin", {
         email,
+        mobile, // Include mobile in the request
         password,
       });
+
       if (response.data && response.data.name) {
         const { name } = response.data;
         console.log("Login Successful:", response.data);
 
         alert("Login Successful!");
-        navigate("/AdminHome", { state: { name, email } });
+        navigate("/AdminHome", { state: { name, email, mobile } });
       } else {
         alert("Login Failed! Name not found.");
       }
@@ -75,6 +79,7 @@ function AdminLogin() {
             <div className="flex gap-4">
               <div className="flex flex-col text-center items-start gap-3.5">
                 <span>E-mail</span>
+                <span>Mobile</span> {/* Added Mobile Label */}
                 <span>Password</span>
               </div>
               <div className="flex flex-col gap-2">
@@ -84,6 +89,14 @@ function AdminLogin() {
                   className="bg-white rounded p-0.5 text-center outline-0"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <input
+                  type="text"  // Changed type to text to allow numeric input for mobile
+                  placeholder="123-456-7890"
+                  className="bg-white rounded p-0.5 text-center outline-0"
+                  value={mobile}
+                  onChange={(e) => setMobile(e.target.value)}
                   required
                 />
                 <input

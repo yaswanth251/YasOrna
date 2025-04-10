@@ -12,15 +12,16 @@ import {
   FaHeart,
 } from "react-icons/fa";
 import { BiCamera } from "react-icons/bi";
-import Slider from "./Slider";
-import Catogery from "./Catogery";
-import Offers from "./Offers";
 
 export default function UserHome({ name, email }) {
   // const [activePanel, setActivePanel] = useState(null);
 
   const inputRef = useRef(null);
+  const inputReff = useRef(null);
+
   const dropdownRef = useRef(null);
+  // const dropdownReff = useRef(null);
+
 
   const [showAccount, setShowAccount] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -40,6 +41,39 @@ export default function UserHome({ name, email }) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const handleSearchh = (e) => {
+    if (e.key === "Enter") {
+      const value = inputReff.current.value.toLowerCase();
+
+      if (value.includes("ring")) {
+        navigate("/Ring");
+      } else if (value.includes("necklace")) {
+        navigate("/Necklace");
+      } else if (value.includes("earrings")) {
+        navigate("/Earrings");
+      } else if (value.includes("bangle") || value.includes("bangles")) {
+        navigate("/Bangles");
+
+      }
+      else if (value.includes("gold") || value.includes("Necklace")) {
+        navigate("/Bangles");
+
+      }
+      else if (value.includes("silver") || value.includes("bracelet") || value.includes("brace")) {
+        navigate("/Bangles");
+
+      }
+
+       else {
+        navigate("/Merge", { state: { query: value } }); // fallback search page
+      }
+    }
+  };
+
+
+
+
   const handleSearch = (e) => {
     if (e.key === "Enter") {
       const value = inputRef.current.value.toLowerCase();
@@ -52,7 +86,18 @@ export default function UserHome({ name, email }) {
         navigate("/Earrings");
       } else if (value.includes("bangle") || value.includes("bangles")) {
         navigate("/Bangles");
-      } else {
+
+      }
+      else if (value.includes("gold") || value.includes("Necklace")) {
+        navigate("/Bangles");
+
+      }
+      else if (value.includes("silver") || value.includes("bracelet") || value.includes("brace")) {
+        navigate("/Bangles");
+
+      }
+
+       else {
         navigate("/Merge", { state: { query: value } }); // fallback search page
       }
     }
@@ -79,11 +124,11 @@ export default function UserHome({ name, email }) {
             {/* Search Bar */}
             <div className="relative w-full max-w-2xl">
               <input
-                ref={inputRef}
+                ref={inputReff}
                 type="text"
                 placeholder="Search for Jewelry..."
                 className="w-full px-4 py-2 pl-10 pr-10 rounded bg-gray-50 focus:outline-none shadow-sm"
-                onClick={handleSearch}
+                onKeyDown={handleSearchh}
               />
               <a
                 href="https://yasorna-visualsearch.streamlit.app/"

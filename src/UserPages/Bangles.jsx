@@ -98,6 +98,43 @@ function Bangles({ name, email }) {
         : [...prevWishlist, product]
     );
   };
+  const increaseQuantity = (productId) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  };
+
+  const decreaseQuantity = (productId) => {
+    setCart((prevCart) =>
+      prevCart
+        .map((item) =>
+          item.id === productId && item.quantity > 1
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  };
+
+  const removeFromCart = (productId) => {
+    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
+  };
+
+  const removeFromWishlist = (productId) => {
+    setWishlist((prevWishlist) => prevWishlist.filter((item) => item.id !== productId));
+  };
+
+  const moveToCart = (product) => {
+    setCart((prevCart) => [...prevCart, { ...product, quantity: 1 }]);
+    removeFromWishlist(product.id);
+  };
+
+  const moveToWishlist = (product) => {
+    setWishlist((prevWishlist) => [...prevWishlist, product]);
+    removeFromCart(product.id);
+  };
 
   return (
     <>
@@ -138,11 +175,17 @@ function Bangles({ name, email }) {
       </div>
 
       <CartWishlist
-        cart={cart}
-        wishlist={wishlist}
-        activePanel={activePanel}
-        setActivePanel={setActivePanel}
-      />
+                cart={cart}
+                wishlist={wishlist}
+                activePanel={activePanel}
+                setActivePanel={setActivePanel}
+                increaseQuantity={increaseQuantity}
+                decreaseQuantity={decreaseQuantity}
+                removeFromCart={removeFromCart}
+                removeFromWishlist={removeFromWishlist}
+                moveToCart={moveToCart}
+                moveToWishlist={moveToWishlist}
+              />
     </div>
     <Foot />
     </>

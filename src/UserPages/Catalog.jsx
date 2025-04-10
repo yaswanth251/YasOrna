@@ -1,9 +1,8 @@
 import React, { useState, useMemo } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
 import ProductView from "./ProductView";
-import CartWishlist from "./CartWishlist"
+import CartWishlist from "./CartWishlist";
 
+// Initial Product Data
 const initialProducts = [
   {
     id: "bangles",
@@ -39,9 +38,7 @@ const initialProducts = [
   },
 ];
 
-
 const Catalog = () => {
-  // const navigate = useNavigate();
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
   const [sortType, setSortType] = useState(null);
@@ -69,7 +66,7 @@ const Catalog = () => {
       return [...prevCart, { ...product, quantity: 1 }];
     });
   };
-  
+
   const handleAddToWishlist = (product) => {
     setWishlist((prevWishlist) => {
       if (prevWishlist.some((item) => item.id === product.id)) {
@@ -78,7 +75,45 @@ const Catalog = () => {
       return [...prevWishlist, product];
     });
   };
-  
+
+  // Handler Functions for Cart and Wishlist
+  const increaseQuantity = (productId) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  };
+
+  const decreaseQuantity = (productId) => {
+    setCart((prevCart) =>
+      prevCart
+        .map((item) =>
+          item.id === productId && item.quantity > 1
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  };
+
+  const removeFromCart = (productId) => {
+    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
+  };
+
+  const removeFromWishlist = (productId) => {
+    setWishlist((prevWishlist) => prevWishlist.filter((item) => item.id !== productId));
+  };
+
+  const moveToCart = (product) => {
+    setCart((prevCart) => [...prevCart, { ...product, quantity: 1 }]);
+    removeFromWishlist(product.id);
+  };
+
+  const moveToWishlist = (product) => {
+    setWishlist((prevWishlist) => [...prevWishlist, product]);
+    removeFromCart(product.id);
+  };
 
   return (
     <div className="min-h-screen py-5">
@@ -88,17 +123,13 @@ const Catalog = () => {
       {/* Sort Buttons */}
       <div className="flex justify-end gap-4 mb-3 p-10">
         <button
-          className={`px-3 py-1 rounded-md ${
-            sortType === "lowToHigh" ? "bg-amber-500 text-white" : "bg-gray-200"
-          }`}
+          className={`px-3 py-1 rounded-md ${sortType === "lowToHigh" ? "bg-amber-500 text-white" : "bg-gray-200"}`}
           onClick={() => setSortType("lowToHigh")}
         >
           Sort: Low to High
         </button>
         <button
-          className={`px-4 py-2 rounded-md ${
-            sortType === "highToLow" ? "bg-amber-500 text-white" : "bg-gray-200"
-          }`}
+          className={`px-4 py-2 rounded-md ${sortType === "highToLow" ? "bg-amber-500 text-white" : "bg-gray-200"}`}
           onClick={() => setSortType("highToLow")}
         >
           Sort: High to Low
@@ -121,12 +152,18 @@ const Catalog = () => {
 
       {/* Sidebar Component */}
       <div className="relative z-1000">
-      <CartWishlist 
-        cart={cart}
-        wishlist={wishlist}
-        activePanel={activePanel}
-        setActivePanel={setActivePanel}
-      />
+        <CartWishlist
+          cart={cart}
+          wishlist={wishlist}
+          activePanel={activePanel}
+          setActivePanel={setActivePanel}
+          increaseQuantity={increaseQuantity}
+          decreaseQuantity={decreaseQuantity}
+          removeFromCart={removeFromCart}
+          removeFromWishlist={removeFromWishlist}
+          moveToCart={moveToCart}
+          moveToWishlist={moveToWishlist}
+        />
       </div>
     </div>
   );

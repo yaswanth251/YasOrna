@@ -39,18 +39,24 @@ function UserLogin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!email || !password) {
+      setError("Please fill out both fields.");
+      return;
+    }
     try {
       const response = await axios.post(
-        "https://yasorna-backend-production.up.railway.app/login",
+        "https://yasorna-backend-production.up.railway.app/userlogin",
         { email, password }
       );
-
+  
+      console.log("Login response:", response.data); // Log the full response
+  
       if (response.data && response.data.name) {
-        const { name } = response.data; // Extract name from response
+        const { name } = response.data;
         console.log("Login Successful:", response.data);
-
+  
         alert("Login Successful!");
-        navigate("/Merge", { state: { name, email } }); // Pass name and email to the next page
+        navigate("/Merge", { state: { name, email } }); // Ensure Merge page handles these values
       } else {
         setError("Login Failed! Name not found.");
       }
@@ -59,6 +65,7 @@ function UserLogin() {
       setError("Login Failed! Check your credentials.");
     }
   };
+  
 
   return (
     <div className="relative h-screen w-screen">

@@ -100,7 +100,7 @@ function AdminLogin() {
               type="submit"
               className="text-white text-2xl border border-white px-5 py-2 rounded-lg hover:bg-orange-300 hover:text-black transition w-max"
             >
-              SignIn
+              Sign In
             </button>
           </form>
         </div>

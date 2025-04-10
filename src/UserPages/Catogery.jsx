@@ -11,8 +11,12 @@ const navigationMap = {
   "Necklace Set": "/Necklace",
   "Diamond Jewellery": "/Ring",
   "Bangles": "/Bangles",
-  "Earrings": "/Earrings",
+  "Earring": "/Earrings",
   "Long Necklace": "/Necklace",
+  "Elegant Earrings":"/Earrings",
+  "Royal Necklace":"/Necklace",
+  "Classic Bangles": "/Bangles",
+  "Luxury Ring":"/Ring",
 };
 
 const categorie = [

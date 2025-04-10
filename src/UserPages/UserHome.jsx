@@ -78,31 +78,26 @@ export default function UserHome({ name, email }) {
     if (e.key === "Enter") {
       const value = inputRef.current.value.toLowerCase();
 
-      if (value.includes("ring")) {
+      if (value.includes("ring") || value.includes("engagement")) {
         navigate("/Ring");
-      } else if (value.includes("necklace")) {
+      } else if (value.includes("necklace") || value.includes("gold")) {
         navigate("/Necklace");
-      } else if (value.includes("earrings")) {
+      } else if (value.includes("earrings") || value.includes("earring")) {
         navigate("/Earrings");
       } else if (value.includes("bangle") || value.includes("bangles")) {
         navigate("/Bangles");
-
       }
       else if (value.includes("gold") || value.includes("Necklace")) {
         navigate("/Bangles");
-
       }
       else if (value.includes("silver") || value.includes("bracelet") || value.includes("brace")) {
         navigate("/Bangles");
-
       }
-
        else {
         navigate("/Merge", { state: { query: value } }); // fallback search page
       }
     }
   };
-
   return (
     <>
       <div className="relative">

@@ -27,8 +27,7 @@ import Payment from "./UserPages/Payment";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<IntroPage />} />
-      <Route path="/Merge" element={<Merge />} />
+      <Route path="/" element={<Merge />} />
       <Route path="/AdminRegister" element={<AdminRegister />} />
       <Route path="/AdminLogin" element={<AdminLogin />} />
       <Route path="/AdminHome" element={<AdminHome />} />
